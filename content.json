@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-31T16:40:00.000Z",
+  "updatedAt": "2026-07-31T10:00:04.242257Z",
   "sermon": {
     "sermonId": "s-2026-07-26-1sam28",
     "date": "2026년 7월 26일 주일",
@@ -7,9 +7,24 @@
     "passage": "사무엘상 28장 3절-19절",
     "preacher": "이수재 목사",
     "keyMessage": "하나님의 침묵은 새 계시가 없어서가 아니라 이미 주신 말씀에 순종하지 않아서이며, 침묵을 깨는 유일한 문은 회개다.",
-    "youtubeId": "",
+    "youtubeId": "102Ufd7dSFo",
     "points": [],
     "meditations": [],
-    "updatedAt": "2026-07-31T16:40:00.000Z"
+    "updatedAt": "2026-07-31T10:00:04.242257Z"
+  },
+  "worship": {
+    "sunday_am": {
+      "videos": [
+        {
+          "youtubeId": "102Ufd7dSFo",
+          "title": "침묵의 밤, 사울의 두 문",
+          "date": "2026-07-26",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘상 28장 3절-19절"
+        }
+      ],
+      "shorts": [],
+      "updatedAt": "2026-07-31T10:00:04.242257Z"
+    }
   }
 }
