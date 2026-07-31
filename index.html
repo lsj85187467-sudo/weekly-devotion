@@ -78,7 +78,12 @@
     background:#2b2a26;color:#fffaf0;padding:12px 18px;border-radius:12px;font-size:14px;font-weight:600;
     box-shadow:0 8px 22px rgba(0,0,0,.22);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60;max-width:calc(100vw - 40px)}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-  .video-frame{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
+  .video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000}
+  .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+  .video-frame{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000;display:block}
+  @supports not (aspect-ratio: 1){
+    .video-frame{height:0;padding-top:56.25%;position:relative}
+  }
   .shorts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
   .shorts-card{background:var(--bg);border-radius:12px;overflow:hidden}
   .shorts-card .thumb{aspect-ratio:9/16;background:#000;position:relative}
@@ -216,7 +221,7 @@ function parseYouTubeId(input){
   return null;
 }
 const ytThumb = (id, q='hq') => `https://img.youtube.com/vi/${id}/${q==='mq'?'mqdefault':'hqdefault'}.jpg`;
-const ytEmbed = (id) => `https://www.youtube.com/embed/${id}?rel=0`;
+const ytEmbed = (id) => `https://www.youtube-nocookie.com/embed/${id}?rel=0&playsinline=1&modestbranding=1`;
 const ytWatch = (id) => `https://www.youtube.com/watch?v=${id}`;
 
 // ============ 관리자 모드 (URL ?admin=1 필요) ============
@@ -391,7 +396,7 @@ function renderSermon(v){
         <p style="color:var(--terra);font-size:13px;font-weight:600;margin:0">${esc(s.date)}</p>
         <h3 style="margin:6px 0 2px;font-size:22px;font-weight:800;color:var(--ink)">${esc(s.title)}</h3>
         <p style="color:var(--sub);font-size:15px;margin:0">${esc(s.passage)}${s.preacher?' · '+esc(s.preacher):''}</p>
-        ${s.youtubeId ? `<iframe class="video-frame" style="margin-top:12px" src="${ytEmbed(s.youtubeId)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="${esc(s.title)}"></iframe>` : ''}
+        ${s.youtubeId ? `<iframe class="video-frame" style="margin-top:12px" src="${ytEmbed(s.youtubeId)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" playsinline referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="${esc(s.title)}"></iframe>` : ''}
         <div class="quote" style="margin-top:14px">"${esc(s.keyMessage)}"</div>
       </div>
 
@@ -424,7 +429,7 @@ function renderSermon(v){
             ${latest ? `
               ${latest.date?`<p style="font-size:12px;color:var(--terra);font-weight:600;margin:0">${esc(latest.date)}</p>`:''}
               ${latest.title?`<p style="font-size:15px;font-weight:700;margin:2px 0 8px;color:var(--ink)">${esc(latest.title)}</p>`:''}
-              <iframe class="video-frame" src="${ytEmbed(latest.youtubeId)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="${esc(latest.title||'')}"></iframe>
+              <iframe class="video-frame" src="${ytEmbed(latest.youtubeId)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" playsinline referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="${esc(latest.title||'')}"></iframe>
               ${latest.scripture?`<p style="margin:6px 0 0;font-size:13px;color:var(--sub)">${esc(latest.scripture)}${latest.preacher?' · '+esc(latest.preacher):''}</p>`:''}
               ${wdata.videos.length>1?`<p style="margin:8px 0 0;font-size:12px;color:var(--sub)">외 ${wdata.videos.length-1}건 · 예배 다시 보기 탭에서 전체 보기</p>`:''}
             ` : `<p class="empty" style="padding:10px 0;font-size:13px;margin:0">아직 등록된 영상이 없습니다.${IS_ADMIN?' 우측 [편집]에서 유튜브 URL을 추가하세요.':''}</p>`}
@@ -789,7 +794,7 @@ function renderWorship(v){
               <div style="margin-bottom:${idx===Math.min(data.videos.length,3)-1?'0':'14px'}">
                 <p style="font-size:13px;color:var(--terra);font-weight:600;margin:0">${esc(vid.date||'')}</p>
                 <p style="font-size:16px;font-weight:700;margin:2px 0 6px;color:var(--ink)">${esc(vid.title||'제목 없음')}</p>
-                <iframe class="video-frame" src="${ytEmbed(vid.youtubeId)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="${esc(vid.title||'')}"></iframe>
+                <iframe class="video-frame" src="${ytEmbed(vid.youtubeId)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" playsinline referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="${esc(vid.title||'')}"></iframe>
                 ${vid.scripture?`<p style="margin:6px 0 0;font-size:13px;color:var(--sub)">${esc(vid.scripture)}${vid.preacher?' · '+esc(vid.preacher):''}</p>`:''}
               </div>`).join('')
           }
