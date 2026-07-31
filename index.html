@@ -219,9 +219,9 @@ const ytThumb = (id, q='hq') => `https://img.youtube.com/vi/${id}/${q==='mq'?'mq
 const ytEmbed = (id) => `https://www.youtube.com/embed/${id}?rel=0`;
 const ytWatch = (id) => `https://www.youtube.com/watch?v=${id}`;
 
-// ============ 관리자 모드 (URL ?admin=1 또는 로컬 파일) ============
-const IS_ADMIN = (new URL(location.href).searchParams.get('admin')==='1')
-              || location.protocol === 'file:';
+// ============ 관리자 모드 (URL ?admin=1 필요) ============
+// 로컬 파일·배포된 URL 모두 기본은 성도용(읽기 전용). 편집하려면 URL 뒤 ?admin=1.
+const IS_ADMIN = new URL(location.href).searchParams.get('admin')==='1';
 
 // ============ content.json 동기화 (배포 시 박사님이 편집한 최신 설교/예배 자동 반영) ============
 async function syncFromContentJson(){
