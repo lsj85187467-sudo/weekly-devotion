@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>주중 묵상과 기도 · 행복한우리교회</title>
+<meta name="description" content="주일 설교로 한 주간 묵상·기도·나눔·예배 다시 보기 — 행복한우리교회" />
+<meta name="theme-color" content="#2f6b63" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E" />
+<style>
+  :root{
+    --bg:#f4efe6; --card:#ffffff; --ink:#2b2a26; --sub:#6f6a60;
+    --teal:#2f6b63; --terra:#bf6b4b; --line:#e6ddcf;
+    --r:18px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Malgun Gothic",sans-serif;
+    line-height:1.6; letter-spacing:-.006em; -webkit-text-size-adjust:100%;
+    font-feature-settings:"tnum";
+  }
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  input,textarea,select{font:inherit;color:inherit}
+  a{color:inherit}
+  .app{max-width:520px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--bg)}
+  header.top{padding:22px 20px 12px;position:sticky;top:0;z-index:10;background:var(--bg)}
+  header.top .today{font-size:13px;color:var(--terra);font-weight:600}
+  header.top h1{margin:2px 0 0;font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+  main{flex:1;padding:0 20px 108px;overflow-y:auto}
+  footer.foot{text-align:center;padding:16px 0 8px;font-size:12px;color:var(--sub)}
+  nav.tabbar{
+    position:fixed;bottom:0;left:0;right:0;max-width:520px;margin:0 auto;
+    display:flex;background:var(--card);border-top:1px solid var(--line);z-index:20;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  nav.tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px 8px;color:var(--sub);font-size:11px;font-weight:600}
+  nav.tabbar button svg{width:22px;height:22px}
+  nav.tabbar button.on{color:var(--teal)}
+  .card{background:var(--card);border-radius:var(--r);padding:18px;margin-bottom:14px;box-shadow:0 1px 3px rgba(45,60,55,.06)}
+  .sec-title{display:flex;align-items:center;gap:8px;margin:14px 0 12px}
+  .sec-title .bar{display:block;width:4px;height:22px;border-radius:3px;background:var(--teal)}
+  .sec-title h2{margin:0;font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+  .sec-title.terra .bar{background:var(--terra)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    padding:11px 16px;border-radius:14px;font-weight:600;font-size:15px}
+  .btn-primary{background:var(--teal);color:#fff;width:100%}
+  .btn-terra{background:var(--terra);color:#fff}
+  .btn-ghost{background:var(--card);color:var(--teal)}
+  .btn-line{background:var(--line);color:var(--ink)}
+  .btn-sm{padding:7px 12px;font-size:13px;border-radius:10px}
+  .lbl{font-size:13px;font-weight:500;color:var(--sub);margin:12px 0 4px}
+  .inp,.ta{width:100%;padding:10px 12px;border:0;border-radius:10px;background:var(--bg);color:var(--ink);outline:none;font-size:15px}
+  .ta{resize:none;line-height:1.6}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-size:14px;font-weight:600;background:var(--card);color:var(--sub)}
+  .chip.on{background:var(--teal);color:#fff}
+  .chip.small{padding:2px 8px;font-size:11px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .row.between{justify-content:space-between;align-items:center}
+  .grid5{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  @media(min-width:520px){.grid5{grid-template-columns:repeat(3,1fr)}}
+  .link-card{display:block;padding:14px;background:var(--bg);border-radius:14px;text-decoration:none;color:var(--ink)}
+  .link-card .k{font-size:15px;font-weight:700}
+  .link-card .m{font-size:12px;color:var(--sub);margin-top:4px}
+  .empty{text-align:center;padding:22px 8px;color:var(--sub);font-size:14px}
+  .quote{padding:14px 16px;background:var(--bg);border-radius:12px;font-size:16px;line-height:1.65;color:var(--ink)}
+  .point{margin-bottom:14px}
+  .point:last-child{margin-bottom:0}
+  .point .h{color:var(--teal);font-weight:700;font-size:15px}
+  .point .b{color:var(--sub);font-size:15px;line-height:1.65;margin-top:4px}
+  .med-q{padding-left:12px;border-left:2px solid var(--terra);color:var(--sub);font-size:15px;line-height:1.65;margin:6px 0}
+  .modal-back{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:50;display:flex;align-items:center;justify-content:center;padding:20px}
+  .modal{background:var(--card);border-radius:16px;padding:22px;width:100%;max-width:360px}
+  .modal h3{margin:0 0 4px;font-size:17px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:6px}
+  .modal p{margin:0 0 12px;font-size:13px;color:var(--sub);line-height:1.55}
+  .toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%) translateY(20px);
+    background:#2b2a26;color:#fffaf0;padding:12px 18px;border-radius:12px;font-size:14px;font-weight:600;
+    box-shadow:0 8px 22px rgba(0,0,0,.22);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60;max-width:calc(100vw - 40px)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .video-frame{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
+  .shorts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+  .shorts-card{background:var(--bg);border-radius:12px;overflow:hidden}
+  .shorts-card .thumb{aspect-ratio:9/16;background:#000;position:relative}
+  .shorts-card .thumb img{width:100%;height:100%;object-fit:cover}
+  .shorts-card .info{padding:8px}
+  .shorts-card .info .t{font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .shorts-card .info a{font-size:11px;color:var(--teal);text-decoration:none}
+  .type-tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+  .type-tabs .chip{flex:none;white-space:nowrap}
+  details.item{background:var(--card);border-radius:var(--r);padding:14px 16px;margin-bottom:10px;box-shadow:0 1px 3px rgba(45,60,55,.06)}
+  details.item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  details.item summary::-webkit-details-marker{display:none}
+  details.item .expand-icon::before{content:"▾";color:var(--sub);font-size:14px}
+  details.item[open] .expand-icon::before{content:"▴"}
+  .flex-between{display:flex;justify-content:space-between;align-items:center}
+  .whitespace-pre{white-space:pre-wrap;word-break:break-word}
+  .icon-btn{display:inline-flex;align-items:center;gap:4px;color:var(--sub);font-size:13px}
+  .icon-btn.terra{color:var(--terra)}
+  .divider{height:1px;background:var(--line);margin:12px 0}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <p class="today" id="todayStr">—</p>
+    <h1>주중 묵상과 기도</h1>
+  </header>
+  <main id="view"><div class="empty">불러오는 중…</div></main>
+  <footer class="foot"><span>행복한우리교회 · 원주</span></footer>
+  <nav class="tabbar" id="tabbar"></nav>
+</div>
+<div id="modalRoot"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+// ============ util ============
+const $ = (sel, el=document) => el.querySelector(sel);
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+const esc = (s) => (s==null?'':String(s)).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nl2br = (s) => esc(s).replace(/\n/g,'<br>');
+const todayStr = () => new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'});
+$('#todayStr').textContent = todayStr();
+
+// storage (localStorage) — 원본 window.storage와 유사한 shape
+const S = {
+  get: (k) => { try{ return localStorage.getItem(k); }catch{ return null; } },
+  set: (k,v) => { try{ localStorage.setItem(k, v); }catch{} },
+  del: (k) => { try{ localStorage.removeItem(k); }catch{} },
+  list: (prefix) => { const out=[]; try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k&&k.startsWith(prefix)) out.push(k); } }catch{} return out; },
+};
+const readJSON = (k, fb=null) => { const v=S.get(k); if(!v) return fb; try{ return JSON.parse(v); }catch{ return fb; } };
+const writeJSON = (k, o) => S.set(k, JSON.stringify(o));
+
+// toast
+let toastTimer=null;
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'), 2400);
+}
+
+// icons (inline svg, Lucide 스타일)
+const I = {
+  book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+  hand:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 14h1v4"/><path d="M14 4.5V10a1 1 0 0 0 1 1v2a2 2 0 0 1-2 2h-1"/><path d="M4 12v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M20 12a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4"/></svg>',
+  users:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  video:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>',
+  pencil:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+  trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>',
+  heart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+  archive:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>',
+  lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+  check2:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+  play:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>',
+  link:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+};
+
+// ============ data ============
+const DEFAULT_SERMON = {
+  date: "2026년 6월 21일 주일",
+  passage: "시편 3:1–8",
+  title: "나를 둘러싼 방패",
+  keyMessage: "사방이 대적으로 둘러싸여도, 여호와는 나를 둘러싼 방패이시다. 그래서 나는 누워 자고 다시 깨어난다.",
+  points: [
+    { head: "둘러싼 대적 (1–2절)", body: "다윗을 치는 자가 많아지고, '하나님께 구원이 없다'는 영적 조롱이 그를 에워쌉니다. 위협은 칼만이 아니라 마음을 흔드는 말로 다가옵니다." },
+    { head: "둘러싼 방패 (3–6절)", body: "그러나 여호와는 나의 방패시요 나의 영광이시요 나의 머리를 드시는 분입니다. 그래서 다윗은 천만 인이 둘러싸도 누워 자고 깨어납니다." },
+    { head: "둘러싼 구원 (7–8절)", body: "구원은 여호와께 있습니다. 일어나 구원하시는 하나님을 부르며, 그 복이 주의 백성 위에 임하기를 구합니다." },
+  ],
+  meditations: [
+    "지금 나를 둘러싸고 흔드는 '두려움의 목소리'는 무엇입니까?",
+    "오늘 밤, 나는 무엇을 의지하며 잠듭니까?",
+    "'구원은 여호와께 있다'는 고백이 이번 주 내 삶에서 어떻게 구체화될 수 있습니까?",
+  ],
+};
+
+const PRAYER_GUIDE = [
+  { tag: "감사", hint: "밤새 지키시고 다시 깨우신 은혜를 기억하며" },
+  { tag: "회개", hint: "두려움 앞에서 하나님보다 상황을 더 크게 보았던 마음을" },
+  { tag: "간구", hint: "나를 둘러싼 문제 가운데 방패 되어 주시길" },
+  { tag: "결단", hint: "잠들 때에도 주를 의지하기로 다짐하며" },
+];
+
+// 이전에 저장했던 API 키가 있다면 정리 (요약 기능 제거됨)
+try { localStorage.removeItem('ai_api_key'); } catch {}
+
+const WORSHIP_TYPES = [
+  { id:'sunday_am', label:'주일 오전', accent:'#2f6b63' },
+  { id:'sunday_pm', label:'주일 저녁', accent:'#4a5db8' },
+  { id:'wednesday', label:'수요', accent:'#3a8a67' },
+  { id:'friday',    label:'금요', accent:'#c9974a' },
+  { id:'wpf',       label:'말씀과 기도 축제', accent:'#bf6b4b' },
+];
+
+// YouTube URL 파서
+function parseYouTubeId(input){
+  if(!input) return null;
+  const s = String(input).trim();
+  if(/^[a-zA-Z0-9_-]{11}$/.test(s)) return s;
+  try {
+    const u = new URL(s.startsWith('http') ? s : 'https://'+s);
+    if(u.hostname.includes('youtube')){
+      const v = u.searchParams.get('v');
+      if(v && /^[a-zA-Z0-9_-]{11}$/.test(v)) return v;
+      const m = u.pathname.match(/\/(shorts|embed|live)\/([a-zA-Z0-9_-]{11})/);
+      if(m) return m[2];
+    }
+    if(u.hostname==='youtu.be'){
+      const m = u.pathname.match(/^\/([a-zA-Z0-9_-]{11})/);
+      if(m) return m[1];
+    }
+  } catch {}
+  return null;
+}
+const ytThumb = (id, q='hq') => `https://img.youtube.com/vi/${id}/${q==='mq'?'mqdefault':'hqdefault'}.jpg`;
+const ytEmbed = (id) => `https://www.youtube.com/embed/${id}?rel=0`;
+const ytWatch = (id) => `https://www.youtube.com/watch?v=${id}`;
+
+// ============ 관리자 모드 (URL ?admin=1 또는 로컬 파일) ============
+const IS_ADMIN = (new URL(location.href).searchParams.get('admin')==='1')
+              || location.protocol === 'file:';
+
+// ============ content.json 동기화 (배포 시 박사님이 편집한 최신 설교/예배 자동 반영) ============
+async function syncFromContentJson(){
+  try {
+    const r = await fetch('./content.json?t=' + Date.now(), { cache:'no-store' });
+    if(!r.ok) return;
+    const remote = await r.json();
+    if(!remote || !remote.updatedAt) return;
+    const localUpd = S.get('content_updated_at') || '';
+    if(localUpd && localUpd >= remote.updatedAt) return; // 로컬이 더 최신
+    if(remote.sermon) writeJSON('sermon', remote.sermon);
+    if(remote.worship){
+      Object.entries(remote.worship).forEach(([k,v]) => writeJSON('worship:'+k, v));
+    }
+    S.set('content_updated_at', remote.updatedAt);
+  } catch(e) { /* content.json 없거나 오류 시 조용히 무시 */ }
+}
+
+// 배포용 content.json 내보내기 (박사님이 편집 후 다운로드 → 리포지토리 업로드)
+function exportContentJson(){
+  const worship = {};
+  WORSHIP_TYPES.forEach(t => { worship[t.id] = loadWorship(t.id); });
+  const bundle = {
+    updatedAt: new Date().toISOString(),
+    sermon: loadSermon(),
+    worship,
+  };
+  S.set('content_updated_at', bundle.updatedAt);
+  const blob = new Blob([JSON.stringify(bundle, null, 2)], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'content.json'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+  toast('content.json 다운로드됨. 이 파일을 리포지토리 최상단에 업로드하세요.');
+}
+
+// ============ router ============
+let currentTab = 'sermon';
+let editingSermon = false;
+let sermonView = 'current';  // current | archive
+let worshipTypeFilter = null; // null = all
+let editingWorship = null; // {typeId} or null
+
+const TABS = [
+  { id:'sermon',    label:'말씀 묵상', icon:'book'  },
+  { id:'prayer',    label:'묵상 기도', icon:'hand'  },
+  { id:'community', label:'공동체 기도', icon:'users' },
+  { id:'worship',   label:'예배 다시 보기', icon:'video' },
+];
+
+function renderTabs(){
+  const nav = $('#tabbar');
+  nav.innerHTML = TABS.map(t => `
+    <button data-tab="${t.id}" class="${currentTab===t.id?'on':''}">
+      ${I[t.icon]}<span>${t.label}</span>
+    </button>
+  `).join('');
+  nav.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    currentTab = b.dataset.tab;
+    editingSermon = false;
+    editingWorship = null;
+    render();
+  }));
+}
+
+function render(){
+  const v = $('#view');
+  if(currentTab==='sermon') renderSermon(v);
+  else if(currentTab==='prayer') renderPrayer(v);
+  else if(currentTab==='community') renderCommunity(v);
+  else if(currentTab==='worship') renderWorship(v);
+  renderTabs();
+}
+
+// ============ 비밀번호 잠금 ============
+let unlockedSession = false;
+function hasPw(){ return !!S.get('editpw'); }
+function requireUnlock(action){
+  if(unlockedSession){ action(); return; }
+  openPwModal(hasPw() ? 'enter' : 'set', action);
+}
+function openPwModal(mode, onSuccess){
+  const root = $('#modalRoot');
+  const isSet = mode==='set';
+  root.innerHTML = `
+    <div class="modal-back">
+      <div class="modal">
+        <h3>${I.lock} ${isSet?'편집 비밀번호 설정':'편집 비밀번호 입력'}</h3>
+        <p>${isSet?'설교 편집과 보관함 관리를 위한 비밀번호를 정해주세요.':'설교를 편집하려면 비밀번호가 필요합니다.'}</p>
+        <input id="pw1" type="password" placeholder="비밀번호" class="inp" style="margin-bottom:8px" />
+        ${isSet?'<input id="pw2" type="password" placeholder="비밀번호 확인" class="inp" style="margin-bottom:8px" />':''}
+        <p id="pwErr" style="color:var(--terra);font-size:13px;margin:0 0 8px;display:none"></p>
+        <div class="row" style="margin:0">
+          <button id="pwOk" class="btn btn-primary" style="flex:1">확인</button>
+          <button id="pwCancel" class="btn btn-line">취소</button>
+        </div>
+      </div>
+    </div>`;
+  const close = () => { root.innerHTML=''; };
+  const err = (m) => { const e=$('#pwErr'); e.textContent=m; e.style.display='block'; };
+  $('#pwCancel').addEventListener('click', close);
+  $('#pwOk').addEventListener('click', () => {
+    const v = $('#pw1').value;
+    if(isSet){
+      const v2 = $('#pw2').value;
+      if(v.length<4) return err('4자 이상 입력해 주세요.');
+      if(v!==v2) return err('두 비밀번호가 다릅니다.');
+      S.set('editpw', v);
+      unlockedSession = true;
+      close();
+      onSuccess && onSuccess();
+    } else {
+      if(S.get('editpw')===v){
+        unlockedSession = true;
+        close();
+        onSuccess && onSuccess();
+      } else err('비밀번호가 맞지 않습니다.');
+    }
+  });
+  setTimeout(()=>{ const el=$('#pw1'); el && el.focus(); }, 30);
+}
+
+// ============ 1. 말씀 묵상 ============
+function loadSermon(){
+  const s = readJSON('sermon', {...DEFAULT_SERMON});
+  if(!s.sermonId){ s.sermonId = uid(); writeJSON('sermon', s); }
+  return s;
+}
+function saveSermon(s){
+  if(!s.sermonId) s.sermonId = uid();
+  s.updatedAt = new Date().toISOString();
+  writeJSON('sermon', s);
+}
+function loadSermonShares(sermonId){
+  return S.list('sshare:').map(k=>{ const o=readJSON(k); return o?{...o,key:k}:null; })
+    .filter(x => x && x.sermonId===sermonId)
+    .sort((a,b)=>b.id.localeCompare(a.id));
+}
+function loadArchive(){
+  return S.list('arch:').map(k=>{ const o=readJSON(k); return o?{...o,key:k}:null; }).filter(Boolean).sort((a,b)=>b.id.localeCompare(a.id));
+}
+function loadMyNotes(){
+  return S.list('med:').map(k=>{ const o=readJSON(k); return o?{...o,key:k}:null; }).filter(Boolean).sort((a,b)=>b.id.localeCompare(a.id));
+}
+
+let sermonDraft = null;
+
+function renderSermon(v){
+  if(editingSermon){ renderSermonEdit(v); return; }
+  const s = loadSermon();
+  const archive = loadArchive();
+  const notes = loadMyNotes();
+
+  v.innerHTML = `
+    <div class="row" style="margin:14px 0">
+      <button class="chip ${sermonView==='current'?'on':''}" data-sv="current">이번 주 말씀</button>
+      <button class="chip ${sermonView==='archive'?'on':''}" data-sv="archive">${I.archive}<span style="margin-left:4px">이전 말씀</span></button>
+    </div>
+    ${sermonView==='current' ? `
+      <div class="sec-title">
+        <span class="bar"></span><h2>주일 설교 묵상</h2>
+        <div style="flex:1"></div>
+        ${IS_ADMIN?`<button id="btnEdit" class="btn btn-ghost btn-sm">${I.pencil}<span style="margin-left:4px">편집</span></button>`:''}
+      </div>
+
+      <div class="card">
+        <p style="color:var(--terra);font-size:13px;font-weight:600;margin:0">${esc(s.date)}</p>
+        <h3 style="margin:6px 0 2px;font-size:22px;font-weight:800;color:var(--ink)">${esc(s.title)}</h3>
+        <p style="color:var(--sub);font-size:15px;margin:0">${esc(s.passage)}${s.preacher?' · '+esc(s.preacher):''}</p>
+        ${s.youtubeId ? `<iframe class="video-frame" style="margin-top:12px" src="${ytEmbed(s.youtubeId)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="${esc(s.title)}"></iframe>` : ''}
+        <div class="quote" style="margin-top:14px">"${esc(s.keyMessage)}"</div>
+      </div>
+
+      <div class="card">
+        <p style="font-weight:800;font-size:17px;margin:0 0 12px;color:var(--ink)">설교 요약</p>
+        ${s.points.map((p,i)=>`
+          <div class="point">
+            <p class="h">${i+1}. ${esc(p.head)}</p>
+            <p class="b">${nl2br(p.body)}</p>
+          </div>`).join('')}
+      </div>
+
+      <div class="card">
+        <p style="font-weight:800;font-size:17px;margin:0 0 10px;color:var(--ink)">묵상 질문</p>
+        ${s.meditations.map(m=>`<p class="med-q">${nl2br(m)}</p>`).join('')}
+      </div>
+
+      ${IS_ADMIN?`<div class="card">
+        <button id="btnArchive" class="icon-btn" style="color:var(--teal);font-weight:600">${I.archive}<span>이번 말씀을 보관함에 넣기</span></button>
+      </div>`:''}
+
+      <div class="sec-title terra"><span class="bar"></span><h2>나의 묵상 노트</h2></div>
+      <div class="card">
+        <textarea id="noteInput" class="ta" rows="3" placeholder="말씀을 묵상하며 떠오른 마음을 적어보세요. (나만 봅니다)"></textarea>
+        <button id="btnAddNote" class="btn btn-primary" style="margin-top:8px">노트 저장</button>
+      </div>
+      ${notes.map(n=>`
+        <div class="card">
+          <div class="flex-between">
+            <p style="font-size:12px;color:var(--sub);margin:0">${esc(n.date)}</p>
+            <button class="icon-btn" data-del-note="${n.key}">${I.trash}</button>
+          </div>
+          <p class="whitespace-pre" style="margin:6px 0 0;font-size:15px;color:var(--ink);line-height:1.65">${nl2br(n.text)}</p>
+        </div>`).join('')}
+
+      <div class="sec-title"><span class="bar"></span><h2>이번 말씀 나눔</h2></div>
+      <div class="card">
+        <p style="color:var(--sub);font-size:13px;margin:0 0 10px">이번 주 설교를 들으며 받은 은혜·질문·결단을 성도와 나눕니다. (로컬 저장 — 향후 공유 서버 붙일 때 실제 성도 간 공유)</p>
+        <input id="shareName" class="inp" placeholder="이름 (익명 원하시면 비워두세요)" style="margin-bottom:6px" />
+        <textarea id="shareInput" class="ta" rows="3" placeholder="이 설교를 통해 받은 은혜·묵상을 나눠주세요."></textarea>
+        <button id="shareAdd" class="btn btn-primary" style="margin-top:8px">나눔 올리기</button>
+      </div>
+      ${loadSermonShares(s.sermonId).map(sh=>`
+        <div class="card">
+          <div class="flex-between" style="margin-bottom:4px">
+            <span style="font-weight:700;color:var(--teal);font-size:15px">${esc(sh.who)}</span>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="font-size:12px;color:var(--sub)">${esc(sh.date)}</span>
+              <button class="icon-btn" data-del-share="${sh.key}">${I.trash}</button>
+            </div>
+          </div>
+          <p class="whitespace-pre" style="margin:0;font-size:15px;line-height:1.65;color:var(--ink)">${nl2br(sh.text)}</p>
+        </div>`).join('')}
+    ` : `
+      <div class="sec-title"><span class="bar"></span><h2>이전 말씀 보관함</h2></div>
+      ${archive.length===0 ? '<div class="card empty">보관된 말씀이 아직 없습니다.</div>' :
+        archive.map(a=>`
+          <details class="item" data-key="${a.key}">
+            <summary>
+              <div>
+                <p style="color:var(--terra);font-size:13px;font-weight:600;margin:0">${esc(a.date)}</p>
+                <p style="font-size:17px;font-weight:800;margin:2px 0;color:var(--ink)">${esc(a.title)}</p>
+                <p style="color:var(--sub);font-size:13px;margin:0">${esc(a.passage)}</p>
+              </div>
+              <span class="expand-icon"></span>
+            </summary>
+            <div class="divider"></div>
+            <p style="font-style:italic;color:var(--ink);font-size:15px;margin:0 0 12px">"${esc(a.keyMessage)}"</p>
+            ${a.points.map((p,i)=>`<div class="point"><p class="h">${i+1}. ${esc(p.head)}</p><p class="b">${nl2br(p.body)}</p></div>`).join('')}
+            <div style="margin-top:10px">${a.meditations.map(m=>`<p class="med-q" style="font-size:13px">${nl2br(m)}</p>`).join('')}</div>
+            <button class="icon-btn terra" data-del-arch="${a.key}" style="margin-top:10px">${I.trash}<span>보관함에서 삭제</span></button>
+          </details>`).join('')
+      }
+    `}
+  `;
+
+  // handlers
+  v.querySelectorAll('[data-sv]').forEach(b=>b.addEventListener('click', () => { sermonView=b.dataset.sv; render(); }));
+  const bEdit = $('#btnEdit'); if(bEdit) bEdit.addEventListener('click', () => requireUnlock(() => { sermonDraft = JSON.parse(JSON.stringify(loadSermon())); editingSermon=true; render(); }));
+  const bArch = $('#btnArchive'); if(bArch) bArch.addEventListener('click', () => requireUnlock(() => {
+    if(!confirm('현재 말씀을 보관함에 저장할까요?')) return;
+    const s = loadSermon();
+    const id = uid();
+    writeJSON('arch:'+id, { ...s, id, archivedDate: todayStr() });
+    toast('보관함에 저장했습니다');
+    render();
+  }));
+  const bAdd = $('#btnAddNote'); if(bAdd) bAdd.addEventListener('click', () => {
+    const t = $('#noteInput').value.trim();
+    if(!t) return;
+    const id = uid();
+    writeJSON('med:'+id, { id, text:t, date: todayStr() });
+    toast('노트를 저장했습니다');
+    render();
+  });
+  v.querySelectorAll('[data-del-note]').forEach(b=>b.addEventListener('click', () => {
+    if(!confirm('이 노트를 삭제할까요?')) return;
+    S.del(b.dataset.delNote); render();
+  }));
+  v.querySelectorAll('[data-del-arch]').forEach(b=>b.addEventListener('click', (e) => {
+    e.preventDefault();
+    requireUnlock(() => {
+      if(!confirm('보관함에서 삭제할까요?')) return;
+      S.del(b.dataset.delArch); render();
+    });
+  }));
+  const bShareAdd = $('#shareAdd'); if(bShareAdd) bShareAdd.addEventListener('click', () => {
+    const t = $('#shareInput').value.trim(); if(!t) return;
+    const nm = $('#shareName').value.trim() || '익명';
+    const s = loadSermon();
+    const id = uid();
+    writeJSON('sshare:'+id, { id, sermonId:s.sermonId, who:nm, text:t, date:todayStr() });
+    toast('나눔을 올렸습니다'); render();
+  });
+  v.querySelectorAll('[data-del-share]').forEach(b=>b.addEventListener('click', () => {
+    if(!confirm('이 나눔을 삭제할까요?')) return;
+    S.del(b.dataset.delShare); render();
+  }));
+}
+
+function renderSermonEdit(v){
+  const d = sermonDraft;
+  const upd = (k,val) => { d[k]=val; };
+  v.innerHTML = `
+    <div class="sec-title terra"><span class="bar"></span><h2>설교 내용 편집</h2></div>
+
+    <div class="card">
+      <p class="lbl">날짜</p>
+      <input id="f-date" class="inp" value="${esc(d.date)}" />
+      <p class="lbl">본문</p>
+      <input id="f-passage" class="inp" value="${esc(d.passage)}" />
+      <p class="lbl">설교 제목</p>
+      <input id="f-title" class="inp" value="${esc(d.title)}" />
+      <p class="lbl">설교자</p>
+      <input id="f-preacher" class="inp" value="${esc(d.preacher||'')}" />
+      <p class="lbl">유튜브 URL <span style="color:var(--sub);font-size:11px">(선택 · 상단에 임베드 자동 표시)</span></p>
+      <input id="f-youtube" class="inp" value="${d.youtubeId?'https://youtu.be/'+esc(d.youtubeId):''}" placeholder="예: https://youtu.be/xxxxxxxxxxx" />
+      <p class="lbl">핵심 메시지</p>
+      <textarea id="f-key" class="ta" rows="3">${esc(d.keyMessage)}</textarea>
+    </div>
+
+    <div class="card">
+      <p class="lbl">대지</p>
+      <div id="points">
+        ${d.points.map((p,i)=>`
+          <div class="point" data-pi="${i}" style="padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:10px">
+            <input class="inp p-head" value="${esc(p.head)}" style="margin-bottom:6px" />
+            <textarea class="ta p-body" rows="3">${esc(p.body)}</textarea>
+            <button class="icon-btn terra p-del" style="margin-top:6px">${I.trash}<span>대지 삭제</span></button>
+          </div>`).join('')}
+      </div>
+      <button id="addPoint" class="icon-btn" style="color:var(--teal)">${I.plus}<span>대지 추가</span></button>
+    </div>
+
+    <div class="card">
+      <p class="lbl">묵상 질문</p>
+      <div id="meds">
+        ${d.meditations.map((m,i)=>`
+          <div class="row" data-mi="${i}" style="align-items:flex-start;margin-bottom:8px">
+            <textarea class="ta m-body" rows="2" style="flex:1">${esc(m)}</textarea>
+            <button class="icon-btn terra m-del" style="margin-top:8px">${I.x}</button>
+          </div>`).join('')}
+      </div>
+      <button id="addMed" class="icon-btn" style="color:var(--teal)">${I.plus}<span>질문 추가</span></button>
+    </div>
+
+    <div class="row" style="margin:0">
+      <button id="saveEdit" class="btn btn-primary" style="flex:1">${I.check}<span style="margin-left:6px">저장</span></button>
+      <button id="cancelEdit" class="btn btn-line">취소</button>
+    </div>
+
+    <div class="card" style="margin-top:14px;border-left:3px solid var(--teal)">
+      <p style="font-weight:800;font-size:15px;margin:0 0 4px;color:var(--ink)">📤 성도에게 공유 (배포 파일 내보내기)</p>
+      <p style="color:var(--sub);font-size:13px;margin:0 0 10px;line-height:1.55">저장 후 <b>content.json</b>을 다운로드받아 리포지토리 최상단에 업로드하면, 성도들이 배포된 앱을 새로고침할 때 자동으로 최신 설교·예배 영상이 반영됩니다.</p>
+      <button id="exportBtn" class="btn btn-ghost" style="width:100%">📤 content.json 내보내기</button>
+    </div>
+  `;
+  const readForm = () => {
+    d.date = $('#f-date').value; d.passage = $('#f-passage').value;
+    d.title = $('#f-title').value; d.keyMessage = $('#f-key').value;
+    d.preacher = $('#f-preacher').value;
+    const yid = parseYouTubeId($('#f-youtube').value);
+    d.youtubeId = yid || '';
+    d.points = Array.from(v.querySelectorAll('#points .point')).map(el => ({
+      head: el.querySelector('.p-head').value, body: el.querySelector('.p-body').value
+    }));
+    d.meditations = Array.from(v.querySelectorAll('#meds .row')).map(el => el.querySelector('.m-body').value);
+  };
+  $('#addPoint').addEventListener('click', () => { readForm(); d.points.push({head:'새 대지',body:''}); sermonDraft=d; render(); });
+  $('#addMed').addEventListener('click', () => { readForm(); d.meditations.push(''); sermonDraft=d; render(); });
+  v.querySelectorAll('.p-del').forEach((btn,i)=>btn.addEventListener('click', () => { readForm(); d.points.splice(i,1); sermonDraft=d; render(); }));
+  v.querySelectorAll('.m-del').forEach((btn,i)=>btn.addEventListener('click', () => { readForm(); d.meditations.splice(i,1); sermonDraft=d; render(); }));
+  $('#saveEdit').addEventListener('click', () => { readForm(); saveSermon(d); editingSermon=false; toast('저장되었습니다'); render(); });
+  $('#cancelEdit').addEventListener('click', () => { editingSermon=false; render(); });
+  $('#exportBtn').addEventListener('click', () => { readForm(); saveSermon(d); exportContentJson(); });
+}
+
+// ============ 2. 묵상 기도 ============
+let prayerActiveTag = PRAYER_GUIDE[0].tag;
+function loadPrayers(){
+  return S.list('pray:').map(k=>{ const o=readJSON(k); return o?{...o,key:k}:null; }).filter(Boolean).sort((a,b)=>b.id.localeCompare(a.id));
+}
+function renderPrayer(v){
+  const entries = loadPrayers();
+  const days = new Set(entries.map(e=>e.ds)).size;
+  const active = PRAYER_GUIDE.find(g=>g.tag===prayerActiveTag) || PRAYER_GUIDE[0];
+  v.innerHTML = `
+    <div class="sec-title"><span class="bar"></span><h2>말씀 묵상 기도</h2></div>
+    <div class="card">
+      <p style="color:var(--sub);font-size:15px;margin:0">이번 본문으로 드리는 기도입니다.</p>
+      <p style="margin:6px 0 0;font-size:15px;color:var(--ink)">이번 주 <span style="font-weight:700;color:var(--teal)">${days}일</span> 동안 기도를 적으셨습니다.</p>
+    </div>
+    <div class="card">
+      <div class="row">
+        ${PRAYER_GUIDE.map(g=>`<button class="chip ${g.tag===prayerActiveTag?'on':''}" data-ptag="${g.tag}">${g.tag}</button>`).join('')}
+      </div>
+      <p style="color:var(--terra);font-size:13px;margin:2px 0 8px">${esc(active.hint)}…</p>
+      <textarea id="prayInput" class="ta" rows="3" placeholder="이 마음을 기도로 적어보세요. (나만 봅니다)"></textarea>
+      <button id="prayAdd" class="btn btn-primary" style="margin-top:8px">기도 저장</button>
+    </div>
+
+    <div class="sec-title terra"><span class="bar"></span><h2>나의 기도 일지</h2></div>
+    ${entries.length===0 ? '<div class="card empty">아직 적은 기도가 없습니다.</div>' :
+      entries.map(e=>`
+        <div class="card">
+          <div class="flex-between">
+            <span class="chip small" style="background:var(--bg);color:var(--teal);padding:3px 10px">${esc(e.tag)}</span>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="font-size:12px;color:var(--sub)">${esc(e.date)}</span>
+              <button class="icon-btn" data-del-pray="${e.key}">${I.trash}</button>
+            </div>
+          </div>
+          <p class="whitespace-pre" style="margin:8px 0 0;font-size:15px;color:var(--ink);line-height:1.65">${nl2br(e.text)}</p>
+        </div>`).join('')}
+  `;
+  v.querySelectorAll('[data-ptag]').forEach(b=>b.addEventListener('click', () => { prayerActiveTag=b.dataset.ptag; render(); }));
+  $('#prayAdd').addEventListener('click', () => {
+    const t = $('#prayInput').value.trim(); if(!t) return;
+    const id = uid();
+    writeJSON('pray:'+id, { id, tag:prayerActiveTag, text:t, date:todayStr(), ds:new Date().toDateString() });
+    toast('기도를 저장했습니다'); render();
+  });
+  v.querySelectorAll('[data-del-pray]').forEach(b=>b.addEventListener('click', () => {
+    if(!confirm('이 기도를 삭제할까요?')) return;
+    S.del(b.dataset.delPray); render();
+  }));
+}
+
+// ============ 3. 공동체 기도제목 ============
+// localStorage 기반: 실제 공동체 공유는 미지원(안내 표시). 본인이 등록한 것 관리·응답 표시 가능.
+let cprayFilter = 'all';
+let cprayAnon = false;
+function loadCPrayers(){
+  return S.list('cpray:').map(k=>{ const o=readJSON(k); return o?{...o,key:k}:null; }).filter(Boolean).sort((a,b)=>b.id.localeCompare(a.id));
+}
+function loadPrayedFor(){ return readJSON('prayedfor', {}); }
+function renderCommunity(v){
+  const list = loadCPrayers();
+  const prayed = loadPrayedFor();
+  const filtered = list.filter(x => cprayFilter==='all' ? true : cprayFilter==='answered' ? x.answered : !x.answered);
+
+  v.innerHTML = `
+    <div class="sec-title"><span class="bar"></span><h2>공동체 기도제목</h2></div>
+    <div class="card">
+      <p style="color:var(--terra);font-size:13px;margin:0">이 앱은 로컬 저장입니다. 실제 성도 간 공유는 향후 서버 연동 시 활성화됩니다. 그 전까지는 내가 함께 기도하고 싶은 제목을 여기에 정리합니다.</p>
+      <textarea id="cprayInput" class="ta" rows="3" placeholder="함께 기도하고 싶은 제목을 나눠주세요." style="margin-top:12px"></textarea>
+      <div class="row" style="align-items:center;margin-top:8px;margin-bottom:0">
+        <button id="anonToggle" class="icon-btn" style="color:var(--ink);font-weight:500">
+          <span style="width:20px;height:20px;border-radius:5px;background:${cprayAnon?'var(--teal)':'var(--line)'};display:flex;align-items:center;justify-content:center">${cprayAnon?'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>':''}</span>
+          <span>익명으로</span>
+        </button>
+        <input id="cprayName" class="inp" placeholder="이름" style="flex:1;display:${cprayAnon?'none':'block'}" />
+      </div>
+      <button id="cprayAdd" class="btn btn-primary" style="margin-top:10px">기도제목 올리기</button>
+    </div>
+
+    <div class="row" style="margin-top:12px">
+      ${[['all','전체'],['active','기도 중'],['answered','응답됨']].map(([f,lbl])=>`<button class="chip ${cprayFilter===f?'on':''}" data-cf="${f}">${lbl}</button>`).join('')}
+    </div>
+
+    ${filtered.length===0 ? `<div class="card empty">${cprayFilter==='answered'?'아직 응답으로 표시된 기도제목이 없습니다.':'나눌 기도제목이 없습니다.'}</div>` :
+      filtered.map(item=>{
+        const mine = !!prayed[item.id];
+        return `
+          <div class="card">
+            ${item.answered ? `<div class="chip small" style="background:var(--bg);color:var(--teal);margin-bottom:8px;padding:4px 10px">${I.check2}<span style="margin-left:4px">응답되었어요${item.answeredDate?' · '+esc(item.answeredDate):''}</span></div>` : ''}
+            <div class="flex-between" style="margin-bottom:4px">
+              <span style="font-weight:700;color:var(--teal);font-size:15px">${esc(item.who)}</span>
+              <span style="font-size:12px;color:var(--sub)">${esc(item.date)}</span>
+            </div>
+            <p class="whitespace-pre" style="margin:0;font-size:15px;line-height:1.65;color:${item.answered?'var(--sub)':'var(--ink)'}">${nl2br(item.text)}</p>
+            <div class="row" style="margin-top:10px;margin-bottom:0">
+              <button class="chip" data-toggle-pray="${item.key}" style="background:${mine?'var(--terra)':'var(--bg)'};color:${mine?'#fff':'var(--terra)'}">
+                ${I.heart}<span>함께 기도합니다${item.count>0?' · '+item.count:''}</span>
+              </button>
+              <button class="chip" data-toggle-ans="${item.key}" style="background:${item.answered?'var(--teal)':'var(--bg)'};color:${item.answered?'#fff':'var(--teal)'}">
+                ${I.check2}<span>${item.answered?'응답 표시 해제':'응답되었어요'}</span>
+              </button>
+              <button class="icon-btn terra" data-del-cpray="${item.key}" style="margin-left:auto">${I.trash}</button>
+            </div>
+          </div>`;
+      }).join('')}
+  `;
+
+  $('#anonToggle').addEventListener('click', () => { cprayAnon=!cprayAnon; render(); });
+  $('#cprayAdd').addEventListener('click', () => {
+    const t = $('#cprayInput').value.trim();
+    const name = cprayAnon ? '' : ($('#cprayName')?.value.trim()||'');
+    if(!t) return;
+    if(!cprayAnon && !name) { toast('이름을 입력하거나 익명을 선택하세요'); return; }
+    const id = uid();
+    writeJSON('cpray:'+id, { id, who: cprayAnon?'익명':name, text:t, date:todayStr(), count:0 });
+    toast('기도제목을 올렸습니다'); render();
+  });
+  v.querySelectorAll('[data-cf]').forEach(b=>b.addEventListener('click', () => { cprayFilter=b.dataset.cf; render(); }));
+  v.querySelectorAll('[data-toggle-pray]').forEach(b=>b.addEventListener('click', () => {
+    const key = b.dataset.togglePray;
+    const item = readJSON(key); if(!item) return;
+    const p = loadPrayedFor();
+    const has = !!p[item.id];
+    const next = Math.max(0, (item.count||0) + (has?-1:1));
+    writeJSON(key, {...item, count:next});
+    if(has) delete p[item.id]; else p[item.id]=true;
+    writeJSON('prayedfor', p);
+    render();
+  }));
+  v.querySelectorAll('[data-toggle-ans]').forEach(b=>b.addEventListener('click', () => {
+    const key = b.dataset.toggleAns;
+    const item = readJSON(key); if(!item) return;
+    const nextAns = !item.answered;
+    writeJSON(key, {...item, answered:nextAns, answeredDate: nextAns?todayStr():null});
+    render();
+  }));
+  v.querySelectorAll('[data-del-cpray]').forEach(b=>b.addEventListener('click', () => {
+    if(!confirm('이 기도제목을 삭제할까요?')) return;
+    S.del(b.dataset.delCpray); render();
+  }));
+}
+
+// ============ 4. 예배 다시 보기 ============
+function loadWorship(typeId){
+  return readJSON('worship:'+typeId, { videos:[], shorts:[] });
+}
+function saveWorship(typeId, data){
+  data.updatedAt = new Date().toISOString();
+  writeJSON('worship:'+typeId, data);
+}
+
+function renderWorship(v){
+  const active = worshipTypeFilter;
+  v.innerHTML = `
+    <div class="sec-title"><span class="bar"></span><h2>예배 다시 보기</h2></div>
+    <p style="color:var(--sub);font-size:13px;margin:0 0 12px">주중에 지난 예배 설교와 파생 숏츠를 다시 보고 나눌 수 있습니다. 관리 편집(자물쇠)으로 유튜브 URL을 등록하세요.</p>
+
+    <div class="type-tabs">
+      <button class="chip ${!active?'on':''}" data-wtype="">전체</button>
+      ${WORSHIP_TYPES.map(t=>`<button class="chip ${active===t.id?'on':''}" data-wtype="${t.id}">${esc(t.label)}</button>`).join('')}
+    </div>
+
+    ${(active ? [WORSHIP_TYPES.find(t=>t.id===active)] : WORSHIP_TYPES).map(t=>{
+      const data = loadWorship(t.id);
+      return `
+        <div class="card" style="border-left:3px solid ${t.accent}">
+          <div class="flex-between" style="margin-bottom:10px">
+            <p style="font-weight:800;font-size:16px;margin:0;color:var(--ink)">${esc(t.label)} 예배</p>
+            ${IS_ADMIN?`<button class="btn btn-ghost btn-sm" data-wedit="${t.id}">${I.pencil}<span style="margin-left:4px">편집</span></button>`:''}
+          </div>
+          ${data.videos.length===0 ? `<p class="empty" style="padding:12px 0">등록된 설교가 없습니다.</p>` :
+            data.videos.slice(0,3).map((vid,idx)=>`
+              <div style="margin-bottom:${idx===Math.min(data.videos.length,3)-1?'0':'14px'}">
+                <p style="font-size:13px;color:var(--terra);font-weight:600;margin:0">${esc(vid.date||'')}</p>
+                <p style="font-size:16px;font-weight:700;margin:2px 0 6px;color:var(--ink)">${esc(vid.title||'제목 없음')}</p>
+                <iframe class="video-frame" src="${ytEmbed(vid.youtubeId)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="${esc(vid.title||'')}"></iframe>
+                ${vid.scripture?`<p style="margin:6px 0 0;font-size:13px;color:var(--sub)">${esc(vid.scripture)}${vid.preacher?' · '+esc(vid.preacher):''}</p>`:''}
+              </div>`).join('')
+          }
+          ${data.videos.length>3?`<p style="font-size:13px;color:var(--sub);margin:8px 0 0">외 ${data.videos.length-3}건 · 편집에서 관리</p>`:''}
+          ${data.shorts.length>0?`
+            <div class="divider"></div>
+            <p style="font-size:14px;font-weight:700;margin:0 0 4px;color:var(--ink)">숏츠</p>
+            <div class="shorts-grid">
+              ${data.shorts.slice(0,4).map(s=>`
+                <div class="shorts-card">
+                  <a href="${ytWatch(s.youtubeId)}" target="_blank" rel="noopener" class="thumb"><img src="${ytThumb(s.youtubeId,'mq')}" alt="${esc(s.title||'')}" loading="lazy"/></a>
+                  <div class="info">
+                    <p class="t">${esc(s.title||'숏츠')}</p>
+                    <a href="#" data-copy="${ytWatch(s.youtubeId)}">공유 링크 복사</a>
+                  </div>
+                </div>`).join('')}
+            </div>
+          `:''}
+        </div>`;
+    }).join('')}
+  `;
+
+  v.querySelectorAll('[data-wtype]').forEach(b=>b.addEventListener('click', () => { worshipTypeFilter=b.dataset.wtype||null; render(); }));
+  v.querySelectorAll('[data-wedit]').forEach(b=>b.addEventListener('click', () => {
+    requireUnlock(() => { editingWorship = b.dataset.wedit; openWorshipEditor(); });
+  }));
+  v.querySelectorAll('[data-copy]').forEach(a=>a.addEventListener('click', async (e) => {
+    e.preventDefault();
+    try { await navigator.clipboard.writeText(a.dataset.copy); toast('링크를 복사했습니다'); }
+    catch { toast('복사 실패'); }
+  }));
+}
+
+function openWorshipEditor(){
+  const t = WORSHIP_TYPES.find(x=>x.id===editingWorship);
+  if(!t) return;
+  const data = loadWorship(t.id);
+  const root = $('#modalRoot');
+  const rerender = () => openWorshipEditor();
+
+  root.innerHTML = `
+    <div class="modal-back">
+      <div class="modal" style="max-width:440px;max-height:85vh;overflow-y:auto">
+        <h3 style="margin-bottom:12px">${esc(t.label)} 예배 관리</h3>
+        <p style="font-size:12px;color:var(--sub);margin:0 0 12px">유튜브 URL을 붙여넣으면 자동으로 인식됩니다.</p>
+
+        <p class="lbl" style="margin-top:0">설교 추가</p>
+        <input id="v-url" class="inp" placeholder="유튜브 URL" style="margin-bottom:6px"/>
+        <input id="v-title" class="inp" placeholder="제목 (선택)" style="margin-bottom:6px"/>
+        <div class="row" style="margin-bottom:6px">
+          <input id="v-date" class="inp" placeholder="날짜 (예: 2026-07-27)" style="flex:1"/>
+          <input id="v-preacher" class="inp" placeholder="설교자" style="flex:1"/>
+        </div>
+        <input id="v-scripture" class="inp" placeholder="본문 (예: 요한복음 3:16)"/>
+        <button id="v-add" class="btn btn-primary" style="margin-top:8px">설교 추가</button>
+
+        <div class="divider"></div>
+
+        <p class="lbl" style="margin-top:0">등록된 설교 (${data.videos.length})</p>
+        ${data.videos.length===0?'<p class="empty" style="padding:8px 0">없음</p>':data.videos.map((vid,i)=>`
+          <div style="padding:8px 0;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center">
+            <img src="${ytThumb(vid.youtubeId,'mq')}" style="width:80px;height:45px;object-fit:cover;border-radius:6px" alt=""/>
+            <div style="flex:1;min-width:0">
+              <p style="font-size:13px;font-weight:600;margin:0;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(vid.title||'제목 없음')}</p>
+              <p style="font-size:11px;color:var(--sub);margin:2px 0 0">${esc(vid.date||'')}</p>
+            </div>
+            <button class="icon-btn terra" data-v-del="${i}">${I.trash}</button>
+          </div>`).join('')}
+
+        <div class="divider"></div>
+
+        <p class="lbl" style="margin-top:0">숏츠 추가</p>
+        <input id="s-url" class="inp" placeholder="유튜브 숏츠 URL" style="margin-bottom:6px"/>
+        <input id="s-title" class="inp" placeholder="제목 (선택)"/>
+        <button id="s-add" class="btn btn-primary" style="margin-top:8px">숏츠 추가</button>
+
+        <p class="lbl">등록된 숏츠 (${data.shorts.length})</p>
+        ${data.shorts.length===0?'<p class="empty" style="padding:8px 0">없음</p>':`<div class="shorts-grid">${data.shorts.map((s,i)=>`
+          <div class="shorts-card" style="position:relative">
+            <div class="thumb"><img src="${ytThumb(s.youtubeId,'mq')}" alt=""/></div>
+            <div class="info">
+              <p class="t">${esc(s.title||'숏츠')}</p>
+              <button class="icon-btn terra" data-s-del="${i}" style="margin-top:2px">${I.trash}<span style="font-size:11px">삭제</span></button>
+            </div>
+          </div>`).join('')}</div>`}
+
+        <button id="wClose" class="btn btn-line" style="width:100%;margin-top:14px">닫기</button>
+      </div>
+    </div>`;
+
+  $('#wClose').addEventListener('click', () => { root.innerHTML=''; editingWorship=null; render(); });
+  $('#v-add').addEventListener('click', () => {
+    const url = $('#v-url').value.trim();
+    const yid = parseYouTubeId(url);
+    if(!yid) { toast('유튜브 URL을 인식하지 못했습니다'); return; }
+    const newVideo = {
+      youtubeId: yid,
+      title: $('#v-title').value.trim(),
+      date: $('#v-date').value.trim(),
+      preacher: $('#v-preacher').value.trim(),
+      scripture: $('#v-scripture').value.trim(),
+    };
+    data.videos.unshift(newVideo);
+    saveWorship(t.id, data);
+
+    // 주일 오전 설교는 자동으로 "이번 주 말씀"에 반영 (제목·본문·설교자·날짜·유튜브)
+    if(t.id === 'sunday_am'){
+      const s = loadSermon();
+      const linked = {
+        ...s,
+        sermonId: uid(), // 새 sermonId → 새 설교로 인식, 나눔·묵상도 새 컨텍스트
+        date: newVideo.date || s.date,
+        title: newVideo.title || s.title,
+        passage: newVideo.scripture || s.passage,
+        preacher: newVideo.preacher || s.preacher || '',
+        youtubeId: yid,
+      };
+      saveSermon(linked);
+      toast('주일 오전 설교로 자동 연결됨. 대지·묵상 질문은 편집에서 채워주세요.');
+    } else {
+      toast('설교를 등록했습니다');
+    }
+    rerender();
+  });
+  $('#s-add').addEventListener('click', () => {
+    const url = $('#s-url').value.trim();
+    const yid = parseYouTubeId(url);
+    if(!yid) { toast('유튜브 URL을 인식하지 못했습니다'); return; }
+    data.shorts.unshift({
+      youtubeId: yid,
+      title: $('#s-title').value.trim(),
+    });
+    saveWorship(t.id, data);
+    rerender();
+  });
+  root.querySelectorAll('[data-v-del]').forEach(b=>b.addEventListener('click', () => {
+    const i = +b.dataset.vDel;
+    if(!confirm('이 설교를 삭제할까요?')) return;
+    data.videos.splice(i,1); saveWorship(t.id, data); rerender();
+  }));
+  root.querySelectorAll('[data-s-del]').forEach(b=>b.addEventListener('click', () => {
+    const i = +b.dataset.sDel;
+    if(!confirm('이 숏츠를 삭제할까요?')) return;
+    data.shorts.splice(i,1); saveWorship(t.id, data); rerender();
+  }));
+}
+
+// ============ init ============
+syncFromContentJson().finally(render);
+</script>
+</body>
+</html>
