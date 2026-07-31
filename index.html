@@ -269,8 +269,12 @@ async function syncFromContentJson(){
     if(!r.ok) return;
     const remote = await r.json();
     if(!remote || !remote.updatedAt) return;
-    const localUpd = S.get('content_updated_at') || '';
-    if(localUpd && localUpd >= remote.updatedAt) return; // 로컬이 더 최신
+    // 관리자는 편집 중 유실 방지를 위해 updatedAt 비교 후 덮어씀
+    // 성도는 항상 remote로 덮어씀 (로컬 stale 데이터가 남아있어 새 설교가 안 보이는 문제 방지)
+    if(IS_ADMIN){
+      const localUpd = S.get('content_updated_at') || '';
+      if(localUpd && localUpd >= remote.updatedAt) return;
+    }
     if(remote.sermon) writeJSON('sermon', remote.sermon);
     if(remote.worship){
       Object.entries(remote.worship).forEach(([k,v]) => writeJSON('worship:'+k, v));
