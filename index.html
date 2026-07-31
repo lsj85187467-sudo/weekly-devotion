@@ -451,7 +451,7 @@ function renderSermon(v){
       </div>` : ''}
 
       <div class="sec-title terra"><span class="bar"></span><h2>이번 주 예배 다시 보기</h2></div>
-      ${WORSHIP_TYPES.map(t=>{
+      ${WORSHIP_TYPES.filter(t=>t.id!=='sunday_am').map(t=>{
         const wdata = loadWorship(t.id);
         const latest = wdata.videos && wdata.videos[0];
         return `
