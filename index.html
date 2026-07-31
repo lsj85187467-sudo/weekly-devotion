@@ -395,6 +395,7 @@ function renderSermon(v){
         <div class="quote" style="margin-top:14px">"${esc(s.keyMessage)}"</div>
       </div>
 
+      ${(s.points && s.points.length>0) ? `
       <div class="card">
         <p style="font-weight:800;font-size:17px;margin:0 0 12px;color:var(--ink)">설교 요약</p>
         ${s.points.map((p,i)=>`
@@ -402,12 +403,13 @@ function renderSermon(v){
             <p class="h">${i+1}. ${esc(p.head)}</p>
             <p class="b">${nl2br(p.body)}</p>
           </div>`).join('')}
-      </div>
+      </div>` : ''}
 
+      ${(s.meditations && s.meditations.length>0) ? `
       <div class="card">
         <p style="font-weight:800;font-size:17px;margin:0 0 10px;color:var(--ink)">묵상 질문</p>
         ${s.meditations.map(m=>`<p class="med-q">${nl2br(m)}</p>`).join('')}
-      </div>
+      </div>` : ''}
 
       <div class="sec-title terra"><span class="bar"></span><h2>이번 주 주중 예배</h2></div>
       ${WORSHIP_TYPES.filter(t=>t.id!=='sunday_am').map(t=>{
