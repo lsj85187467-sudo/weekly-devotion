@@ -283,22 +283,90 @@ async function syncFromContentJson(){
   } catch(e) { /* content.json 없거나 오류 시 조용히 무시 */ }
 }
 
-// 배포용 content.json 내보내기 (박사님이 편집 후 다운로드 → 리포지토리 업로드)
-function exportContentJson(){
+// 배포용 content.json 내보내기 (수동 fallback)
+function buildContentBundle(){
   const worship = {};
   WORSHIP_TYPES.forEach(t => { worship[t.id] = loadWorship(t.id); });
-  const bundle = {
+  return {
     updatedAt: new Date().toISOString(),
     sermon: loadSermon(),
     worship,
   };
+}
+function exportContentJson(){
+  const bundle = buildContentBundle();
   S.set('content_updated_at', bundle.updatedAt);
   const blob = new Blob([JSON.stringify(bundle, null, 2)], { type:'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = 'content.json'; a.click();
   setTimeout(()=>URL.revokeObjectURL(url), 1000);
-  toast('content.json 다운로드됨. 이 파일을 리포지토리 최상단에 업로드하세요.');
+  toast('content.json 다운로드됨. 리포지토리 최상단에 업로드하세요.');
+}
+
+// ============ GitHub 자동 배포 (관리자 편집 → 즉시 성도 앱 반영) ============
+const GITHUB_REPO = 'lsj85187467-sudo/weekly-devotion';
+function getGhToken(){ return S.get('gh_token') || ''; }
+function setGhToken(t){ if(t) S.set('gh_token', t); else S.del('gh_token'); }
+
+async function pushContentToGitHub(bundle){
+  const token = getGhToken();
+  if(!token) return { skipped: true };
+  // 현재 파일 sha 조회
+  let sha = null;
+  try {
+    const r0 = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/content.json`, {
+      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+    });
+    if(r0.ok){ const j = await r0.json(); sha = j.sha; }
+  } catch {}
+  // UTF-8 안전 base64
+  const jsonStr = JSON.stringify(bundle, null, 2);
+  const b64 = btoa(String.fromCharCode(...new TextEncoder().encode(jsonStr)));
+  const body = { message: '자동 배포: 관리자 편집 반영', content: b64 };
+  if(sha) body.sha = sha;
+  const r = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/content.json`, {
+    method: 'PUT',
+    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if(!r.ok){
+    const txt = await r.text().catch(()=>'');
+    let msg = `GitHub ${r.status}`;
+    try { const j = JSON.parse(txt); if(j.message) msg += ': ' + j.message; } catch {}
+    throw new Error(msg);
+  }
+  return { success: true };
+}
+
+let autoSyncPending = false;
+async function autoSyncIfEnabled(){
+  if(!IS_ADMIN) return;
+  if(!getGhToken()) return;
+  if(autoSyncPending) return;
+  autoSyncPending = true;
+  try {
+    const bundle = buildContentBundle();
+    S.set('content_updated_at', bundle.updatedAt);
+    await pushContentToGitHub(bundle);
+    toast('✓ 성도 앱에 자동 반영됨 (약 1분 후 새로고침)');
+  } catch(e){
+    console.error(e);
+    toast('자동 반영 실패: ' + (e.message||'오류') + ' — [수동 내보내기]로 대체하세요');
+  } finally {
+    autoSyncPending = false;
+  }
+}
+
+function openGhTokenSetup(){
+  const cur = getGhToken();
+  const masked = cur ? cur.slice(0,10) + '...' + cur.slice(-4) : '(미설정)';
+  const msg = `GitHub 자동 배포 설정\n\n현재 토큰: ${masked}\n\n[설정 순서]\n1) https://github.com/settings/personal-access-tokens/new 열기\n2) Token name: weekly-devotion-auto\n3) Repository access: Only select repositories → weekly-devotion\n4) Permissions → Repository permissions → Contents = Read and write\n5) Generate token → 표시된 토큰 복사\n\n토큰(github_pat_로 시작)을 붙여넣으세요. 비우고 확인하면 삭제됩니다.`;
+  const t = prompt(msg, cur);
+  if(t===null) return;
+  setGhToken(t.trim());
+  toast(t.trim() ? '토큰 저장됨. 이제 편집 저장 시 자동 배포됩니다.' : '토큰 삭제됨.');
+  render();
 }
 
 // ============ router ============
@@ -632,9 +700,12 @@ function renderSermonEdit(v){
     </div>
 
     <div class="card" style="margin-top:14px;border-left:3px solid var(--teal)">
-      <p style="font-weight:800;font-size:15px;margin:0 0 4px;color:var(--ink)">📤 성도에게 공유 (배포 파일 내보내기)</p>
-      <p style="color:var(--sub);font-size:13px;margin:0 0 10px;line-height:1.55">저장 후 <b>content.json</b>을 다운로드받아 리포지토리 최상단에 업로드하면, 성도들이 배포된 앱을 새로고침할 때 자동으로 최신 설교·예배 영상이 반영됩니다.</p>
-      <button id="exportBtn" class="btn btn-ghost" style="width:100%">📤 content.json 내보내기</button>
+      <p style="font-weight:800;font-size:15px;margin:0 0 4px;color:var(--ink)">🚀 성도 앱 자동 배포</p>
+      <p style="color:var(--sub);font-size:13px;margin:0 0 10px;line-height:1.55">
+        ${getGhToken() ? '✓ 자동 배포 활성. <b>[저장]</b> 시 성도 앱에 자동 반영됩니다.' : '⚠ 자동 배포 미설정. 아래 버튼으로 GitHub Token 1회 설정하면 저장할 때마다 자동 반영됩니다.'}
+      </p>
+      <button id="ghSetupBtn" class="btn btn-ghost" style="width:100%;margin-bottom:6px">🔑 ${getGhToken() ? '자동 배포 토큰 재설정' : '자동 배포 설정 (GitHub Token)'}</button>
+      <button id="exportBtn" class="btn btn-ghost" style="width:100%;font-size:13px;color:var(--sub)">📤 수동 내보내기 (fallback)</button>
     </div>
   `;
   const readForm = () => {
@@ -652,9 +723,10 @@ function renderSermonEdit(v){
   $('#addMed').addEventListener('click', () => { readForm(); d.meditations.push(''); sermonDraft=d; render(); });
   v.querySelectorAll('.p-del').forEach((btn,i)=>btn.addEventListener('click', () => { readForm(); d.points.splice(i,1); sermonDraft=d; render(); }));
   v.querySelectorAll('.m-del').forEach((btn,i)=>btn.addEventListener('click', () => { readForm(); d.meditations.splice(i,1); sermonDraft=d; render(); }));
-  $('#saveEdit').addEventListener('click', () => { readForm(); saveSermon(d); editingSermon=false; toast('저장되었습니다'); render(); });
+  $('#saveEdit').addEventListener('click', () => { readForm(); saveSermon(d); editingSermon=false; toast('저장되었습니다'); render(); autoSyncIfEnabled(); });
   $('#cancelEdit').addEventListener('click', () => { editingSermon=false; render(); });
   $('#exportBtn').addEventListener('click', () => { readForm(); saveSermon(d); exportContentJson(); });
+  $('#ghSetupBtn').addEventListener('click', openGhTokenSetup);
 }
 
 // ============ 2. 묵상 기도 ============
@@ -955,6 +1027,7 @@ function openWorshipEditor(){
     } else {
       toast('설교를 등록했습니다');
     }
+    autoSyncIfEnabled();
     rerender();
   });
   $('#s-add').addEventListener('click', () => {
@@ -966,17 +1039,18 @@ function openWorshipEditor(){
       title: $('#s-title').value.trim(),
     });
     saveWorship(t.id, data);
+    autoSyncIfEnabled();
     rerender();
   });
   root.querySelectorAll('[data-v-del]').forEach(b=>b.addEventListener('click', () => {
     const i = +b.dataset.vDel;
     if(!confirm('이 설교를 삭제할까요?')) return;
-    data.videos.splice(i,1); saveWorship(t.id, data); rerender();
+    data.videos.splice(i,1); saveWorship(t.id, data); autoSyncIfEnabled(); rerender();
   }));
   root.querySelectorAll('[data-s-del]').forEach(b=>b.addEventListener('click', () => {
     const i = +b.dataset.sDel;
     if(!confirm('이 숏츠를 삭제할까요?')) return;
-    data.shorts.splice(i,1); saveWorship(t.id, data); rerender();
+    data.shorts.splice(i,1); saveWorship(t.id, data); autoSyncIfEnabled(); rerender();
   }));
 }
 
