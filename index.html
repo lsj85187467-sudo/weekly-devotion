@@ -279,6 +279,11 @@ async function syncFromContentJson(){
     if(remote.worship){
       Object.entries(remote.worship).forEach(([k,v]) => writeJSON('worship:'+k, v));
     }
+    if(Array.isArray(remote.archive)){
+      // 기존 로컬 archive 전부 지우고 remote 것으로 대체
+      S.list('arch:').forEach(k => S.del(k));
+      remote.archive.forEach(a => { if(a && a.id) writeJSON('arch:'+a.id, a); });
+    }
     S.set('content_updated_at', remote.updatedAt);
   } catch(e) { /* content.json 없거나 오류 시 조용히 무시 */ }
 }
@@ -287,10 +292,13 @@ async function syncFromContentJson(){
 function buildContentBundle(){
   const worship = {};
   WORSHIP_TYPES.forEach(t => { worship[t.id] = loadWorship(t.id); });
+  // 보관함(이전 말씀) 배열
+  const archive = S.list('arch:').map(k=>{ const o=readJSON(k); return o||null; }).filter(Boolean);
   return {
     updatedAt: new Date().toISOString(),
     sermon: loadSermon(),
     worship,
+    archive,
   };
 }
 function exportContentJson(){
@@ -611,6 +619,7 @@ function renderSermon(v){
     writeJSON('arch:'+id, { ...s, id, archivedDate: todayStr() });
     toast('보관함에 저장했습니다');
     render();
+    autoSyncIfEnabled();
   }));
   const bAdd = $('#btnAddNote'); if(bAdd) bAdd.addEventListener('click', () => {
     const t = $('#noteInput').value.trim();
@@ -629,6 +638,7 @@ function renderSermon(v){
     requireUnlock(() => {
       if(!confirm('보관함에서 삭제할까요?')) return;
       S.del(b.dataset.delArch); render();
+      autoSyncIfEnabled();
     });
   }));
   v.querySelectorAll('[data-wedit-inline]').forEach(b=>b.addEventListener('click', () => {
