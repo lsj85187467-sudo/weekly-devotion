@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-05T01:48:15.840708Z",
+  "updatedAt": "2026-08-05T04:04:14.129421Z",
   "sermon": {
     "sermonId": "s-2026-07-26-1sam28",
     "date": "2026년 7월 26일 주일",
@@ -95,6 +95,19 @@
       ],
       "shorts": [],
       "updatedAt": "2026-08-05T01:48:15.840708Z"
+    },
+    "sunday_pm": {
+      "videos": [
+        {
+          "youtubeId": "22vcylzBYLg",
+          "title": "주일저녁예배 26.07.26",
+          "date": "2026-07-26",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘상 28장"
+        }
+      ],
+      "shorts": [],
+      "updatedAt": "2026-08-05T04:04:14.129421Z"
     }
   },
   "archive": [
