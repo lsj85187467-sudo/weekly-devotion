@@ -503,10 +503,16 @@ function openPwModal(mode, onSuccess){
 }
 
 // ============ 1. 말씀 묵상 ============
+// 카톡 인앱 등 일부 브라우저는 localStorage 저장이 실패할 수 있으므로
+// localStorage → window.__CONTENT__ → DEFAULT_SERMON 순서로 fallback
 function loadSermon(){
-  const s = readJSON('sermon', {...DEFAULT_SERMON});
-  if(!s.sermonId){ s.sermonId = uid(); writeJSON('sermon', s); }
-  return s;
+  const stored = readJSON('sermon', null);
+  if(stored && stored.sermonId) return stored;
+  const inline = (window.__CONTENT__ && window.__CONTENT__.sermon) || null;
+  const base = inline ? {...inline} : {...DEFAULT_SERMON};
+  if(!base.sermonId) base.sermonId = uid();
+  try { writeJSON('sermon', base); } catch {}
+  return base;
 }
 function saveSermon(s){
   if(!s.sermonId) s.sermonId = uid();
@@ -519,7 +525,11 @@ function loadSermonShares(sermonId){
     .sort((a,b)=>b.id.localeCompare(a.id));
 }
 function loadArchive(){
-  return S.list('arch:').map(k=>{ const o=readJSON(k); return o?{...o,key:k}:null; }).filter(Boolean).sort((a,b)=>b.id.localeCompare(a.id));
+  const stored = S.list('arch:').map(k=>{ const o=readJSON(k); return o?{...o,key:k}:null; }).filter(Boolean);
+  if(stored.length > 0) return stored.sort((a,b)=>b.id.localeCompare(a.id));
+  // localStorage 실패 대비 fallback
+  const inline = (window.__CONTENT__ && window.__CONTENT__.archive) || [];
+  return inline.map(a => a && a.id ? {...a, key:'arch:'+a.id} : null).filter(Boolean).sort((a,b)=>b.id.localeCompare(a.id));
 }
 function loadMyNotes(){
   return S.list('med:').map(k=>{ const o=readJSON(k); return o?{...o,key:k}:null; }).filter(Boolean).sort((a,b)=>b.id.localeCompare(a.id));
@@ -921,8 +931,12 @@ function renderCommunity(v){
 }
 
 // ============ 4. 예배 다시 보기 ============
+// localStorage 실패 대비 window.__CONTENT__로 fallback
 function loadWorship(typeId){
-  return readJSON('worship:'+typeId, { videos:[], shorts:[] });
+  const stored = readJSON('worship:'+typeId, null);
+  if(stored) return stored;
+  const inline = window.__CONTENT__ && window.__CONTENT__.worship && window.__CONTENT__.worship[typeId];
+  return inline ? {...inline} : { videos:[], shorts:[] };
 }
 function saveWorship(typeId, data){
   data.updatedAt = new Date().toISOString();
