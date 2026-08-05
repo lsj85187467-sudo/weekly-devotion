@@ -7,6 +7,8 @@
 <meta name="description" content="주일 설교로 한 주간 묵상·기도·나눔·예배 다시 보기 — 행복한우리교회" />
 <meta name="theme-color" content="#2f6b63" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E" />
+<!-- 최신 설교/영상 데이터 인라인 로드 (fetch가 실패하는 안드로이드 카톡 인앱 등에서도 항상 렌더됨). 관리자 편집 시 자동 갱신. -->
+<script src="./content.js"></script>
 <style>
   :root{
     --bg:#f4efe6; --card:#ffffff; --ink:#2b2a26; --sub:#6f6a60;
@@ -262,33 +264,47 @@ function ytPlayerBlock(youtubeId, title, extraStyle=''){
 // 로컬 파일·배포된 URL 모두 기본은 성도용(읽기 전용). 편집하려면 URL 뒤 ?admin=1.
 const IS_ADMIN = new URL(location.href).searchParams.get('admin')==='1';
 
-// ============ content.json 동기화 (배포 시 박사님이 편집한 최신 설교/예배 자동 반영) ============
+// ============ 최신 설교/예배 데이터 반영 ============
+// 데이터 소스는 두 가지:
+//   1) content.js — <head>에서 즉시 로드되는 window.__CONTENT__ (fetch 실패해도 확보됨)
+//   2) content.json — 정본. fetch 성공 시 인라인보다 우선 (더 최신일 수 있으므로).
+// 배포는 관리자 편집 시 content.js·content.json 둘 다 push하므로 보통 두 값이 동일합니다.
+// 안드로이드 카톡 인앱 등 fetch가 실패하는 환경에서도 (1)이 있어 앱이 정상 렌더됩니다.
+function applyRemoteContent(remote){
+  if(!remote || !remote.updatedAt) return false;
+  // 관리자는 편집 중 유실 방지를 위해 updatedAt 비교 후 덮어씀
+  if(IS_ADMIN){
+    const localUpd = S.get('content_updated_at') || '';
+    if(localUpd && localUpd >= remote.updatedAt) return false;
+  }
+  if(remote.sermon) writeJSON('sermon', remote.sermon);
+  if(remote.worship){
+    Object.entries(remote.worship).forEach(([k,v]) => writeJSON('worship:'+k, v));
+  }
+  if(Array.isArray(remote.archive)){
+    // 기존 로컬 archive 전부 지우고 remote 것으로 대체
+    S.list('arch:').forEach(k => S.del(k));
+    remote.archive.forEach(a => { if(a && a.id) writeJSON('arch:'+a.id, a); });
+  }
+  S.set('content_updated_at', remote.updatedAt);
+  return true;
+}
+
 async function syncFromContentJson(){
+  // 1) 인라인 데이터(content.js) 즉시 적용 — fetch 실패해도 최소 이 데이터로 렌더됨
+  if(typeof window.__CONTENT__ === 'object' && window.__CONTENT__){
+    applyRemoteContent(window.__CONTENT__);
+  }
+  // 2) content.json으로 최신 시도 (성공 시 더 최신인 경우 덮어씀)
   try {
     const r = await fetch('./content.json?t=' + Date.now(), { cache:'no-store' });
     if(!r.ok) return;
     const remote = await r.json();
-    if(!remote || !remote.updatedAt) return;
-    // 관리자는 편집 중 유실 방지를 위해 updatedAt 비교 후 덮어씀
-    // 성도는 항상 remote로 덮어씀 (로컬 stale 데이터가 남아있어 새 설교가 안 보이는 문제 방지)
-    if(IS_ADMIN){
-      const localUpd = S.get('content_updated_at') || '';
-      if(localUpd && localUpd >= remote.updatedAt) return;
-    }
-    if(remote.sermon) writeJSON('sermon', remote.sermon);
-    if(remote.worship){
-      Object.entries(remote.worship).forEach(([k,v]) => writeJSON('worship:'+k, v));
-    }
-    if(Array.isArray(remote.archive)){
-      // 기존 로컬 archive 전부 지우고 remote 것으로 대체
-      S.list('arch:').forEach(k => S.del(k));
-      remote.archive.forEach(a => { if(a && a.id) writeJSON('arch:'+a.id, a); });
-    }
-    S.set('content_updated_at', remote.updatedAt);
-  } catch(e) { /* content.json 없거나 오류 시 조용히 무시 */ }
+    applyRemoteContent(remote);
+  } catch(e) { /* fetch 실패해도 인라인 데이터로 이미 반영됨 */ }
 }
 
-// 배포용 content.json 내보내기 (수동 fallback)
+// 배포용 content.json / content.js 내보내기 (수동 fallback)
 function buildContentBundle(){
   const worship = {};
   WORSHIP_TYPES.forEach(t => { worship[t.id] = loadWorship(t.id); });
@@ -301,15 +317,26 @@ function buildContentBundle(){
     archive,
   };
 }
+// content.js 파일 텍스트 생성 — <head>에서 즉시 로드되는 인라인 소스
+function buildContentJsText(bundle){
+  return '// 이 파일은 관리자 편집 시 자동 생성됩니다. 수동 편집 금지.\n'
+       + '// content.json과 동일한 데이터를 인라인 script로 담아 fetch 실패(안드로이드 카톡 인앱 등) 상황에서도 앱이 정상 렌더되게 합니다.\n'
+       + 'window.__CONTENT__ = ' + JSON.stringify(bundle, null, 2) + ';\n';
+}
+function downloadBlob(text, filename, mime){
+  const blob = new Blob([text], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+}
 function exportContentJson(){
   const bundle = buildContentBundle();
   S.set('content_updated_at', bundle.updatedAt);
-  const blob = new Blob([JSON.stringify(bundle, null, 2)], { type:'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'content.json'; a.click();
-  setTimeout(()=>URL.revokeObjectURL(url), 1000);
-  toast('content.json 다운로드됨. 리포지토리 최상단에 업로드하세요.');
+  downloadBlob(JSON.stringify(bundle, null, 2), 'content.json', 'application/json');
+  // content.js도 함께 다운로드 (수동 업로드 시 둘 다 리포지토리 최상단에 올려야 함)
+  setTimeout(() => downloadBlob(buildContentJsText(bundle), 'content.js', 'application/javascript'), 300);
+  toast('content.json + content.js 다운로드됨. 둘 다 리포지토리 최상단에 업로드하세요.');
 }
 
 // ============ GitHub 자동 배포 (관리자 편집 → 즉시 성도 앱 반영) ============
@@ -317,33 +344,45 @@ const GITHUB_REPO = 'lsj85187467-sudo/weekly-devotion';
 function getGhToken(){ return S.get('gh_token') || ''; }
 function setGhToken(t){ if(t) S.set('gh_token', t); else S.del('gh_token'); }
 
-async function pushContentToGitHub(bundle){
+// UTF-8 안전 base64 인코딩
+function b64utf8(str){
+  return btoa(String.fromCharCode(...new TextEncoder().encode(str)));
+}
+// GitHub Contents API로 단일 파일 push (기존 sha 자동 조회)
+async function pushFileToGitHub(path, text, message){
   const token = getGhToken();
-  if(!token) return { skipped: true };
-  // 현재 파일 sha 조회
+  if(!token) throw new Error('토큰 없음');
   let sha = null;
   try {
-    const r0 = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/content.json`, {
+    const r0 = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`, {
       headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
     });
     if(r0.ok){ const j = await r0.json(); sha = j.sha; }
   } catch {}
-  // UTF-8 안전 base64
-  const jsonStr = JSON.stringify(bundle, null, 2);
-  const b64 = btoa(String.fromCharCode(...new TextEncoder().encode(jsonStr)));
-  const body = { message: '자동 배포: 관리자 편집 반영', content: b64 };
+  const body = { message, content: b64utf8(text) };
   if(sha) body.sha = sha;
-  const r = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/content.json`, {
+  const r = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`, {
     method: 'PUT',
     headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
   if(!r.ok){
     const txt = await r.text().catch(()=>'');
-    let msg = `GitHub ${r.status}`;
+    let msg = `GitHub ${r.status} (${path})`;
     try { const j = JSON.parse(txt); if(j.message) msg += ': ' + j.message; } catch {}
     throw new Error(msg);
   }
+  return { success: true };
+}
+
+async function pushContentToGitHub(bundle){
+  const token = getGhToken();
+  if(!token) return { skipped: true };
+  // content.json (정본)과 content.js (인라인 로드용) 둘 다 push.
+  // 하나 실패하면 예외를 던져 상위(toast)에 표시. 순차 처리로 각 실패 지점을 구분.
+  const msg = '자동 배포: 관리자 편집 반영';
+  await pushFileToGitHub('content.json', JSON.stringify(bundle, null, 2), msg);
+  await pushFileToGitHub('content.js', buildContentJsText(bundle), msg);
   return { success: true };
 }
 

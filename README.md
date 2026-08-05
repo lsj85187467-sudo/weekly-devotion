@@ -23,12 +23,14 @@
 2. **예배 다시 보기 → 주일 오전 [편집]** → 유튜브 URL·제목·본문·설교자 입력 → 저장
    - 자동으로 말씀 묵상 탭의 이번 주 설교로 연결됨
 3. **말씀 묵상 → [편집]** → 대지·묵상 질문 채움 → 저장
-4. 편집 화면 하단 **[📤 content.json 내보내기]** 클릭 → 다운로드
-5. 다운로드된 `content.json`을 이 리포지토리 최상단에 업로드
-   - GitHub 웹: 리포지토리 → Add file → Upload files → content.json 드래그 → Commit
+4. 편집 화면 하단 **[📤 content.json 내보내기]** 클릭 → `content.json`과 `content.js` 두 파일이 다운로드됨
+5. 두 파일을 이 리포지토리 최상단에 업로드 (**둘 다** 올려야 함)
+   - GitHub 웹: 리포지토리 → Add file → Upload files → content.json + content.js 드래그 → Commit
 6. 1–2분 후 성도가 접속하는 URL에 자동 반영
+
+> **왜 두 파일인가**: `content.json`은 정본이고, `content.js`는 `<head>`에서 인라인으로 즉시 로드되는 사본입니다. 안드로이드 카톡 인앱 브라우저는 fetch가 실패하는 경우가 있어 `content.json`이 안 읽힐 수 있는데, `content.js`가 있으면 fetch 여부와 무관하게 최소한 인라인 데이터로 앱이 정상 렌더됩니다. GitHub 토큰(자동 배포)이 설정되어 있으면 두 파일 모두 자동으로 push됩니다.
 
 ## 개인 데이터
 
 성도의 묵상 노트·기도 일지·나눔은 각자 브라우저 localStorage에 저장 (개인·기기별).
-관리자의 sermon·worship 데이터는 `content.json`을 통해 모든 성도에게 공유.
+관리자의 sermon·worship 데이터는 `content.json` + `content.js`를 통해 모든 성도에게 공유.
