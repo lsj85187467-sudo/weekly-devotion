@@ -115,6 +115,7 @@
     <div id="inappBanner" style="display:none;margin-top:10px;padding:10px 12px;background:#fff3e0;color:#7a4c1c;border-radius:10px;font-size:12.5px;line-height:1.5">
       카카오톡 안에서 열면 유튜브 재생이 안 뜰 수 있어요. 우상단 <b>⋮ (메뉴) → 다른 브라우저로 열기</b>를 눌러 사파리·크롬으로 열면 완전히 보입니다. 또는 각 영상 썸네일을 <b>탭하면 유튜브 앱</b>에서 열립니다.
     </div>
+    <div id="adminSyncBanner" style="display:none;margin-top:10px;padding:10px 12px;border-radius:10px;font-size:12.5px;line-height:1.5"></div>
   </header>
   <script>
     if(/kakaotalk|line|naver|instagram|fban|fbav|whatsapp|wechat/i.test(navigator.userAgent)){
@@ -386,23 +387,97 @@ async function pushContentToGitHub(bundle){
   return { success: true };
 }
 
+// 저장 시 GitHub에 push가 안 되는 경우(토큰 미설정 or push 실패) — 두 파일 자동 다운로드하고
+// 큰 모달로 다음 액션을 안내. 관리자가 침묵의 실패에 당하지 않도록.
+const REPO_UPLOAD_URL = `https://github.com/${GITHUB_REPO}/upload/main`;
+function openManualUploadModal(reason){
+  const root = $('#modalRoot');
+  root.innerHTML = `
+    <div class="modal-back">
+      <div class="modal" style="max-width:440px">
+        <h3 style="color:#c9532e;margin-top:0">⚠ 성도 앱에 자동 반영되지 않았습니다</h3>
+        <p style="font-size:14px;line-height:1.6;color:var(--ink)"><b>이유:</b> ${esc(reason)}</p>
+        <p style="font-size:14px;line-height:1.6;color:var(--ink)">
+          방금 편집한 내용의 <b>content.json</b>과 <b>content.js</b> 두 파일이 자동으로 다운로드되었습니다.
+          아래 [GitHub에 업로드] 버튼을 누르면 리포지토리 업로드 페이지가 열립니다. 두 파일을 <b>드래그해서 놓고 Commit</b>하시면 1–2분 후 성도 앱에 반영됩니다.
+        </p>
+        <div class="row" style="margin:12px 0 8px">
+          <a href="${REPO_UPLOAD_URL}" target="_blank" rel="noopener" class="btn btn-primary" style="flex:1;text-align:center;text-decoration:none">GitHub에 업로드</a>
+          <button id="mu-token" class="btn btn-line">🔑 토큰 설정</button>
+        </div>
+        <p style="font-size:12.5px;color:var(--sub);margin:8px 0 0;line-height:1.55">
+          토큰을 한 번 설정해두시면 다음부터 저장만 하면 자동으로 반영됩니다. 지금은 그냥 위의 [GitHub에 업로드]로만 처리하셔도 됩니다.
+        </p>
+        <div class="row" style="margin-top:10px">
+          <button id="mu-close" class="btn btn-ghost" style="flex:1">닫기</button>
+        </div>
+      </div>
+    </div>`;
+  $('#mu-close').addEventListener('click', () => { root.innerHTML=''; });
+  $('#mu-token').addEventListener('click', () => { root.innerHTML=''; openGhTokenSetup(); });
+}
+
 let autoSyncPending = false;
 async function autoSyncIfEnabled(){
   if(!IS_ADMIN) return;
-  if(!getGhToken()) return;
   if(autoSyncPending) return;
   autoSyncPending = true;
   try {
     const bundle = buildContentBundle();
     S.set('content_updated_at', bundle.updatedAt);
+    const hasToken = !!getGhToken();
+    if(!hasToken){
+      // 토큰이 없으면 push 자체가 불가능 — 두 파일 다운로드 fallback + 큰 안내
+      downloadBlob(JSON.stringify(bundle, null, 2), 'content.json', 'application/json');
+      setTimeout(() => downloadBlob(buildContentJsText(bundle), 'content.js', 'application/javascript'), 300);
+      openManualUploadModal('GitHub 자동 배포 토큰이 설정되지 않았습니다.');
+      renderAdminSyncBanner();
+      return;
+    }
     await pushContentToGitHub(bundle);
     toast('✓ 성도 앱에 자동 반영됨 (약 1분 후 새로고침)');
+    renderAdminSyncBanner();
   } catch(e){
     console.error(e);
-    toast('자동 반영 실패: ' + (e.message||'오류') + ' — [수동 내보내기]로 대체하세요');
+    // push 시도했지만 실패 — 마찬가지로 두 파일 다운로드 + 큰 안내
+    try {
+      const bundle = buildContentBundle();
+      downloadBlob(JSON.stringify(bundle, null, 2), 'content.json', 'application/json');
+      setTimeout(() => downloadBlob(buildContentJsText(bundle), 'content.js', 'application/javascript'), 300);
+    } catch {}
+    openManualUploadModal('GitHub 자동 배포 실패: ' + (e.message||'오류') + ' (토큰이 만료되었거나 권한이 부족할 수 있음)');
+    renderAdminSyncBanner();
   } finally {
     autoSyncPending = false;
   }
+}
+
+// 관리자 화면 상단 배너 — 자동 배포 상태를 항상 한눈에 보이도록
+function renderAdminSyncBanner(){
+  const el = document.getElementById('adminSyncBanner');
+  if(!el) return;
+  if(!IS_ADMIN){ el.style.display='none'; return; }
+  const token = getGhToken();
+  el.style.display='block';
+  if(token){
+    el.style.background = '#e8f5ec';
+    el.style.color = '#2f6b3c';
+    el.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+        <div><b>✓ 자동 배포 활성</b> · 편집 저장 시 성도 앱에 즉시 반영됩니다.</div>
+        <button id="asb-token" style="background:none;border:1px solid #2f6b3c;color:#2f6b3c;font-size:12px;padding:4px 8px;border-radius:6px;cursor:pointer">🔑 토큰 관리</button>
+      </div>`;
+  } else {
+    el.style.background = '#fde7e0';
+    el.style.color = '#8a2a15';
+    el.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+        <div style="flex:1;min-width:180px"><b>⚠ 자동 배포 미설정</b> · 편집 저장해도 성도 앱에 <b>반영되지 않습니다</b>. 저장 시 파일이 자동 다운로드되니 GitHub에 업로드하시거나, 아래 토큰을 한 번 설정하세요.</div>
+        <button id="asb-token" style="background:#8a2a15;border:0;color:#fff;font-size:13px;padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:600">🔑 토큰 설정</button>
+      </div>`;
+  }
+  const btn = document.getElementById('asb-token');
+  if(btn) btn.addEventListener('click', () => openGhTokenSetup());
 }
 
 function openGhTokenSetup(){
@@ -413,6 +488,7 @@ function openGhTokenSetup(){
   if(t===null) return;
   setGhToken(t.trim());
   toast(t.trim() ? '토큰 저장됨. 이제 편집 저장 시 자동 배포됩니다.' : '토큰 삭제됨.');
+  renderAdminSyncBanner();
   render();
 }
 
@@ -452,6 +528,7 @@ function render(){
   else if(currentTab==='community') renderCommunity(v);
   else if(currentTab==='worship') renderWorship(v);
   renderTabs();
+  renderAdminSyncBanner();
 }
 
 // ============ 비밀번호 잠금 ============
