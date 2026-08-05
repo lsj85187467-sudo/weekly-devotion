@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-05T01:31:16.232520Z",
+  "updatedAt": "2026-08-05T01:48:15.840708Z",
   "sermon": {
     "sermonId": "s-2026-07-26-1sam28",
     "date": "2026년 7월 26일 주일",
@@ -79,6 +79,13 @@
     "wpf": {
       "videos": [
         {
+          "youtubeId": "rh5sZ3NGMy0",
+          "title": "말라기와 함께하는 겟세마네 기도회 2일차",
+          "date": "2026-07",
+          "preacher": "이수재 목사",
+          "scripture": "말라기"
+        },
+        {
           "youtubeId": "vPzBeo2--DQ",
           "title": "말라기와 함께하는 겟세마네 기도회 1일차",
           "date": "2026-07",
@@ -87,7 +94,7 @@
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-08-05T01:31:16.232520Z"
+      "updatedAt": "2026-08-05T01:48:15.840708Z"
     }
   },
   "archive": [
