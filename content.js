@@ -1,7 +1,7 @@
 // 이 파일은 관리자 편집 시 자동 생성됩니다. 수동 편집 금지.
 // content.json과 동일한 데이터를 인라인 script로 담아 fetch 실패(안드로이드 카톡 인앱 등) 상황에서도 앱이 정상 렌더되게 합니다.
 window.__CONTENT__ = {
-  "updatedAt": "2026-07-31T11:19:05.984125Z",
+  "updatedAt": "2026-08-05T01:31:16.232520Z",
   "sermon": {
     "sermonId": "s-2026-07-26-1sam28",
     "date": "2026년 7월 26일 주일",
@@ -57,6 +57,39 @@ window.__CONTENT__ = {
       ],
       "shorts": [],
       "updatedAt": "2026-07-31T10:46:34.418Z"
+    },
+    "friday": {
+      "videos": [
+        {
+          "youtubeId": "vEUTi18oZW4",
+          "title": "금요예배 26.07.31",
+          "date": "2026-07-31",
+          "preacher": "이수재 목사",
+          "scripture": ""
+        },
+        {
+          "youtubeId": "zM4Gnc5_tT8",
+          "title": "금요예배 26.7.24",
+          "date": "2026-07-24",
+          "preacher": "이수재 목사",
+          "scripture": ""
+        }
+      ],
+      "shorts": [],
+      "updatedAt": "2026-08-05T01:31:16.232520Z"
+    },
+    "wpf": {
+      "videos": [
+        {
+          "youtubeId": "vPzBeo2--DQ",
+          "title": "말라기와 함께하는 겟세마네 기도회 1일차",
+          "date": "2026-07",
+          "preacher": "이수재 목사",
+          "scripture": "말라기"
+        }
+      ],
+      "shorts": [],
+      "updatedAt": "2026-08-05T01:31:16.232520Z"
     }
   },
   "archive": [
