@@ -108,6 +108,13 @@ window.__CONTENT__ = {
     "sunday_pm": {
       "videos": [
         {
+          "youtubeId": "I-zR_GbvBAY",
+          "title": "주일저녁예배 26.08.09",
+          "date": "2026-08-09",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘상 29장"
+        },
+        {
           "youtubeId": "22vcylzBYLg",
           "title": "주일저녁예배 26.07.26",
           "date": "2026-07-26",
@@ -123,7 +130,7 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-08-05T04:10:46.319347Z"
+      "updatedAt": "2026-08-10T00:00:00.000000Z"
     }
   },
   "archive": [
