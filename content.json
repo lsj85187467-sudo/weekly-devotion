@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-05T04:10:46.319347Z",
+  "updatedAt": "2026-08-10T00:00:00.000000Z",
   "sermon": {
     "sermonId": "s-2026-07-26-1sam28",
     "date": "2026년 7월 26일 주일",
@@ -33,6 +33,13 @@
     "sunday_am": {
       "videos": [
         {
+          "youtubeId": "xn_2R0Utyn4",
+          "title": "회개보다 앞 선 은혜",
+          "date": "2026-08-09",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘상 29장"
+        },
+        {
           "youtubeId": "102Ufd7dSFo",
           "title": "침묵의 밤, 사울의 두 문",
           "date": "2026-07-26",
@@ -41,7 +48,7 @@
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-07-31T10:31:19.095085Z"
+      "updatedAt": "2026-08-10T00:00:00.000000Z"
     },
     "wednesday": {
       "videos": [
