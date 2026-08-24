@@ -701,7 +701,7 @@ function renderSermon(v){
         <p style="color:var(--terra);font-size:13px;font-weight:600;margin:0">${esc(s.date)}</p>
         <h3 style="margin:6px 0 2px;font-size:22px;font-weight:800;color:var(--ink)">${esc(s.title)}</h3>
         <p style="color:var(--sub);font-size:15px;margin:0">${esc(s.passage)}${s.preacher?' · '+esc(s.preacher):''}</p>
-        ${s.youtubeId ? `<div style="margin-top:12px">${ytPlayerBlock(s.youtubeId, s.title)}</div>` : ''}
+        ${s.youtubeId ? `<div style="margin-top:12px">${ytPlayerBlock(s.youtubeId, s.title, '', s.startSec)}</div>` : ''}
         <div class="quote" style="margin-top:14px">"${esc(s.keyMessage)}"</div>
       </div>
 
