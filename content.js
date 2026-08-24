@@ -1,7 +1,7 @@
 // 이 파일은 관리자 편집 시 자동 생성됩니다. 수동 편집 금지.
 // content.json과 동일한 데이터를 인라인 script로 담아 fetch 실패(안드로이드 카톡 인앱 등) 상황에서도 앱이 정상 렌더되게 합니다.
 window.__CONTENT__ = {
-  "updatedAt": "2026-08-24T01:29:06.348055Z",
+  "updatedAt": "2026-08-24T02:01:20.775820Z",
   "sermon": {
     "sermonId": "s-2026-08-16-1sam30",
     "date": "2026년 8월 16일 주일",
@@ -35,6 +35,14 @@ window.__CONTENT__ = {
     "sunday_am": {
       "videos": [
         {
+          "youtubeId": "lQZDkPNgbJs",
+          "title": "사울 왕의 죽음과 장례식",
+          "date": "2026-08-23",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘상 31장",
+          "startSec": 8527
+        },
+        {
           "youtubeId": "_GrI5Ne-O18",
           "title": "여호와를 힘입다",
           "date": "2026-08-16",
@@ -57,7 +65,7 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-08-24T01:29:06.348055Z"
+      "updatedAt": "2026-08-24T02:01:20.775820Z"
     },
     "wednesday": {
       "videos": [

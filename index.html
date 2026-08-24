@@ -232,19 +232,19 @@ function parseYouTubeId(input){
   return null;
 }
 const ytThumb = (id, q='hq') => `https://img.youtube.com/vi/${id}/${q==='mq'?'mqdefault':'hqdefault'}.jpg`;
-const ytEmbed = (id) => `https://www.youtube-nocookie.com/embed/${id}?rel=0&playsinline=1&modestbranding=1`;
-const ytWatch = (id) => `https://www.youtube.com/watch?v=${id}`;
+const ytEmbed = (id, startSec) => `https://www.youtube-nocookie.com/embed/${id}?rel=0&playsinline=1&modestbranding=1${startSec ? '&start=' + Math.floor(startSec) : ''}`;
+const ytWatch = (id, startSec) => `https://www.youtube.com/watch?v=${id}${startSec ? '&t=' + Math.floor(startSec) + 's' : ''}`;
 
 // 카톡·라인 등 인앱 브라우저 감지 (유튜브 임베드 차단됨)
 const IS_INAPP = /kakaotalk|line|naver|instagram|fban|fbav|whatsapp|wechat/i.test(navigator.userAgent);
 
 // 유튜브 플레이어 블록: 일반 브라우저는 iframe, 인앱 브라우저는 큰 썸네일+재생버튼 (탭 시 유튜브 앱으로)
-function ytPlayerBlock(youtubeId, title, extraStyle=''){
+function ytPlayerBlock(youtubeId, title, extraStyle='', startSec){
   if(!youtubeId) return '';
   const t = title || '';
   if(IS_INAPP){
     return `
-      <a href="${ytWatch(youtubeId)}" target="_blank" rel="noopener"
+      <a href="${ytWatch(youtubeId, startSec)}" target="_blank" rel="noopener"
          style="display:block;position:relative;text-decoration:none;${extraStyle}">
         <img src="${ytThumb(youtubeId,'hq')}" alt="${esc(t)}"
              style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;background:#000;display:block" />
@@ -258,7 +258,7 @@ function ytPlayerBlock(youtubeId, title, extraStyle=''){
         </div>
       </a>`;
   }
-  return `<iframe class="video-frame" style="${extraStyle}" src="${ytEmbed(youtubeId)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" playsinline referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="${esc(t)}"></iframe>`;
+  return `<iframe class="video-frame" style="${extraStyle}" src="${ytEmbed(youtubeId, startSec)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" playsinline referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="${esc(t)}"></iframe>`;
 }
 
 // ============ 관리자 모드 (URL ?admin=1 필요) ============
@@ -734,7 +734,7 @@ function renderSermon(v){
             ${latest ? `
               ${latest.date?`<p style="font-size:12px;color:var(--terra);font-weight:600;margin:0">${esc(latest.date)}</p>`:''}
               ${latest.title?`<p style="font-size:15px;font-weight:700;margin:2px 0 8px;color:var(--ink)">${esc(latest.title)}</p>`:''}
-              ${ytPlayerBlock(latest.youtubeId, latest.title)}
+              ${ytPlayerBlock(latest.youtubeId, latest.title, '', latest.startSec)}
               ${latest.scripture?`<p style="margin:6px 0 0;font-size:13px;color:var(--sub)">${esc(latest.scripture)}${latest.preacher?' · '+esc(latest.preacher):''}</p>`:''}
               ${wdata.videos.length>1?`<p style="margin:8px 0 0;font-size:12px;color:var(--sub)">외 ${wdata.videos.length-1}건 · 예배 다시 보기 탭에서 전체 보기</p>`:''}
             ` : `<p class="empty" style="padding:10px 0;font-size:13px;margin:0">아직 등록된 영상이 없습니다.${IS_ADMIN?' 우측 [편집]에서 유튜브 URL을 추가하세요.':''}</p>`}
@@ -1109,7 +1109,7 @@ function renderWorship(v){
               <div style="margin-bottom:${idx===Math.min(data.videos.length,3)-1?'0':'14px'}">
                 <p style="font-size:13px;color:var(--terra);font-weight:600;margin:0">${esc(vid.date||'')}</p>
                 <p style="font-size:16px;font-weight:700;margin:2px 0 6px;color:var(--ink)">${esc(vid.title||'제목 없음')}</p>
-                ${ytPlayerBlock(vid.youtubeId, vid.title)}
+                ${ytPlayerBlock(vid.youtubeId, vid.title, '', vid.startSec)}
                 ${vid.scripture?`<p style="margin:6px 0 0;font-size:13px;color:var(--sub)">${esc(vid.scripture)}${vid.preacher?' · '+esc(vid.preacher):''}</p>`:''}
               </div>`).join('')
           }

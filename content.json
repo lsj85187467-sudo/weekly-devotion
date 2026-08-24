@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-24T01:29:06.348055Z",
+  "updatedAt": "2026-08-24T02:01:20.775820Z",
   "sermon": {
     "sermonId": "s-2026-08-16-1sam30",
     "date": "2026년 8월 16일 주일",
@@ -33,6 +33,14 @@
     "sunday_am": {
       "videos": [
         {
+          "youtubeId": "lQZDkPNgbJs",
+          "title": "사울 왕의 죽음과 장례식",
+          "date": "2026-08-23",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘상 31장",
+          "startSec": 8527
+        },
+        {
           "youtubeId": "_GrI5Ne-O18",
           "title": "여호와를 힘입다",
           "date": "2026-08-16",
@@ -55,7 +63,7 @@
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-08-24T01:29:06.348055Z"
+      "updatedAt": "2026-08-24T02:01:20.775820Z"
     },
     "wednesday": {
       "videos": [
