@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-24T02:15:48.611824Z",
+  "updatedAt": "2026-08-25T03:15:18.840196Z",
   "sermon": {
     "sermonId": "s-2026-08-23-1sam31",
     "date": "2026년 8월 23일 주일",
@@ -109,6 +109,13 @@
     "wpf": {
       "videos": [
         {
+          "youtubeId": "7wKHj7WdQwg",
+          "title": "제7차 말씀과기도축제",
+          "date": "2026-08-24",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘하 1장"
+        },
+        {
           "youtubeId": "rh5sZ3NGMy0",
           "title": "말라기와 함께하는 겟세마네 기도회 2일차",
           "date": "2026-07",
@@ -124,7 +131,7 @@
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-08-05T01:48:15.840708Z"
+      "updatedAt": "2026-08-25T03:15:18.840196Z"
     },
     "sunday_pm": {
       "videos": [
