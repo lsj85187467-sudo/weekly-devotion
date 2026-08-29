@@ -1,7 +1,7 @@
 // 이 파일은 관리자 편집 시 자동 생성됩니다. 수동 편집 금지.
 // content.json과 동일한 데이터를 인라인 script로 담아 fetch 실패(안드로이드 카톡 인앱 등) 상황에서도 앱이 정상 렌더되게 합니다.
 window.__CONTENT__ = {
-  "updatedAt": "2026-08-28T00:22:53.663259Z",
+  "updatedAt": "2026-08-29T00:00:00.000000Z",
   "sermon": {
     "sermonId": "s-2026-08-23-1sam31",
     "date": "2026년 8월 23일 주일",
@@ -111,6 +111,13 @@ window.__CONTENT__ = {
     "wpf": {
       "videos": [
         {
+          "youtubeId": "u5mwXyC1k8E",
+          "title": "제7차 말씀과기도축제",
+          "date": "2026-08-28",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘하 5장"
+        },
+        {
           "youtubeId": "f1X7a_Hw7nY",
           "title": "제7차 말씀과기도축제",
           "date": "2026-08-27",
@@ -154,7 +161,7 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-08-28T00:22:53.663259Z"
+      "updatedAt": "2026-08-29T00:00:00.000000Z"
     },
     "sunday_pm": {
       "videos": [
