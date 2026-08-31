@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-29T00:00:00.000000Z",
+  "updatedAt": "2026-08-31T00:00:00.000000Z",
   "sermon": {
     "sermonId": "s-2026-08-23-1sam31",
     "date": "2026년 8월 23일 주일",
@@ -109,6 +109,13 @@
     "wpf": {
       "videos": [
         {
+          "youtubeId": "8K4z-qtB6wQ",
+          "title": "제7차 말씀과기도축제",
+          "date": "2026-08-30",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘하 6장"
+        },
+        {
           "youtubeId": "u5mwXyC1k8E",
           "title": "제7차 말씀과기도축제",
           "date": "2026-08-28",
@@ -159,7 +166,7 @@
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-08-29T00:00:00.000000Z"
+      "updatedAt": "2026-08-31T00:00:00.000000Z"
     },
     "sunday_pm": {
       "videos": [
