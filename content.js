@@ -119,7 +119,7 @@ window.__CONTENT__ = {
         {
           "youtubeId": "R8OxgQ6lFEg",
           "title": "제7차 말씀과기도축제",
-          "date": "2026-09-04",
+          "date": "2026-09-03",
           "preacher": "이수재 목사",
           "scripture": "사무엘하 10장"
         },
