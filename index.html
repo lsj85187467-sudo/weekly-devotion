@@ -1105,15 +1105,15 @@ function renderWorship(v){
             ${IS_ADMIN?`<button class="btn btn-ghost btn-sm" data-wedit="${t.id}">${I.pencil}<span style="margin-left:4px">편집</span></button>`:''}
           </div>
           ${data.videos.length===0 ? `<p class="empty" style="padding:12px 0">등록된 설교가 없습니다.</p>` :
-            data.videos.slice(0,3).map((vid,idx)=>`
-              <div style="margin-bottom:${idx===Math.min(data.videos.length,3)-1?'0':'14px'}">
+            (active ? data.videos : data.videos.slice(0,3)).map((vid,idx,arr)=>`
+              <div style="margin-bottom:${idx===arr.length-1?'0':'14px'}">
                 <p style="font-size:13px;color:var(--terra);font-weight:600;margin:0">${esc(vid.date||'')}</p>
                 <p style="font-size:16px;font-weight:700;margin:2px 0 6px;color:var(--ink)">${esc(vid.title||'제목 없음')}</p>
                 ${ytPlayerBlock(vid.youtubeId, vid.title, '', vid.startSec)}
                 ${vid.scripture?`<p style="margin:6px 0 0;font-size:13px;color:var(--sub)">${esc(vid.scripture)}${vid.preacher?' · '+esc(vid.preacher):''}</p>`:''}
               </div>`).join('')
           }
-          ${data.videos.length>3?`<p style="font-size:13px;color:var(--sub);margin:8px 0 0">외 ${data.videos.length-3}건 · 편집에서 관리</p>`:''}
+          ${!active && data.videos.length>3?`<p style="font-size:13px;color:var(--sub);margin:8px 0 0">외 ${data.videos.length-3}건 · 상단 카테고리 탭에서 전체 보기</p>`:''}
           ${data.shorts.length>0?`
             <div class="divider"></div>
             <p style="font-size:14px;font-weight:700;margin:0 0 4px;color:var(--ink)">숏츠</p>
