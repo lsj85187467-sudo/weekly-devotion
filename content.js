@@ -226,6 +226,13 @@ window.__CONTENT__ = {
           "date": "2025-08-18",
           "preacher": "이수재 목사",
           "scripture": "창세기 2장"
+        },
+        {
+          "youtubeId": "DOXeSbOKwZ8",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-17",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 1장"
         }
       ],
       "shorts": [],
