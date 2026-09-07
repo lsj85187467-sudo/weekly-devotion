@@ -255,6 +255,13 @@ window.__CONTENT__ = {
     "sunday_pm": {
       "videos": [
         {
+          "youtubeId": "ptk3JGY-XAI",
+          "title": "언약신학 복음 세미나",
+          "date": "2026-09-06",
+          "preacher": "이수재 목사",
+          "scripture": ""
+        },
+        {
           "youtubeId": "I-zR_GbvBAY",
           "title": "주일저녁예배 26.08.09",
           "date": "2026-08-09",
