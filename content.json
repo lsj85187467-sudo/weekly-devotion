@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-06T00:00:00.000000Z",
+  "updatedAt": "2026-09-07T00:00:00.000000Z",
   "sermon": {
     "sermonId": "s-2026-08-30-2sam6",
     "date": "2026년 8월 30일 주일",
@@ -32,6 +32,13 @@
   "worship": {
     "sunday_am": {
       "videos": [
+        {
+          "youtubeId": "ptk3JGY-XAI",
+          "title": "당신이 그 사람이라",
+          "date": "2026-09-06",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘하 12장 7절-15절"
+        },
         {
           "youtubeId": "ZZcStHmqaC0",
           "title": "우리를 춤추게 하시는 예수 그리스도",
