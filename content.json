@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T00:00:00.000000Z",
+  "updatedAt": "2026-09-09T00:00:00.000000Z",
   "sermon": {
     "sermonId": "s-2026-09-06-2sam12",
     "date": "2026년 9월 6일 주일",
@@ -233,6 +233,20 @@
     "wpf1": {
       "videos": [
         {
+          "youtubeId": "qae7Ifdn0pU",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-19",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 3장"
+        },
+        {
+          "youtubeId": "zSk8JfCLsd8",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-19",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 3장"
+        },
+        {
           "youtubeId": "ApIYEIj0mdk",
           "title": "제1차 말씀과기도축제",
           "date": "2025-08-18",
@@ -248,7 +262,7 @@
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-09-06T00:00:00.000000Z"
+      "updatedAt": "2026-09-09T00:00:00.000000Z"
     },
     "sunday_pm": {
       "videos": [
