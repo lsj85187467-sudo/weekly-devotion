@@ -235,6 +235,20 @@ window.__CONTENT__ = {
     "wpf1": {
       "videos": [
         {
+          "youtubeId": "uj873oEM7jo",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-24",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 8장"
+        },
+        {
+          "youtubeId": "mg-jdrwGTyI",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-24",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 8장"
+        },
+        {
           "youtubeId": "TIoqOn3xm4k",
           "title": "제1차 말씀과기도축제",
           "date": "2025-08-23",
