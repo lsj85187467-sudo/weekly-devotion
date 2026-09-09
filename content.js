@@ -235,6 +235,13 @@ window.__CONTENT__ = {
     "wpf1": {
       "videos": [
         {
+          "youtubeId": "HaePJ6Zr6f0",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-21",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 5장"
+        },
+        {
           "youtubeId": "vAOLjwZ5Dto",
           "title": "제1차 말씀과기도축제",
           "date": "2025-08-20",
