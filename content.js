@@ -103,10 +103,17 @@ window.__CONTENT__ = {
           "date": "2026년7월29일",
           "preacher": "이수재 목사",
           "scripture": "여호수아 3장 전체"
+        },
+        {
+          "youtubeId": "QAYtPafYe1o",
+          "title": "수요예배 26.07.15",
+          "date": "2026-07-15",
+          "preacher": "이수재 목사",
+          "scripture": "여호수아 1장 강해"
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-08-24T02:15:48.611824Z"
+      "updatedAt": "2026-09-10T00:00:00.000000Z"
     },
     "friday": {
       "videos": [
