@@ -84,6 +84,13 @@ window.__CONTENT__ = {
     "wednesday": {
       "videos": [
         {
+          "youtubeId": "IunVHU-rEsw",
+          "title": "수요예배 26.09.09",
+          "date": "2026-09-09",
+          "preacher": "박찬일 선교사",
+          "scripture": "여호수아 5장"
+        },
+        {
           "youtubeId": "BuA_bh8hSug",
           "title": "수요예배 26.08.12",
           "date": "2026-08-12",
