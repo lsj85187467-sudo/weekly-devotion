@@ -173,6 +173,13 @@ window.__CONTENT__ = {
     "wpf": {
       "videos": [
         {
+          "youtubeId": "njWFsK5-xG0",
+          "title": "제7차 말씀과기도축제",
+          "date": "2026-09-20",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘하 19장"
+        },
+        {
           "youtubeId": "vX5yLZm69A8",
           "title": "제7차 말씀과기도축제",
           "date": "2026-09-18",
@@ -321,7 +328,7 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-09-19T00:00:00.000000Z"
+      "updatedAt": "2026-09-21T00:00:00.000000Z"
     },
     "wpf1": {
       "videos": [
