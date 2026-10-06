@@ -194,6 +194,13 @@ window.__CONTENT__ = {
           "scripture": "사무엘하 24장"
         },
         {
+          "youtubeId": "dpWy3e1iz_I",
+          "title": "제7차 말씀과기도축제",
+          "date": "2026-09-27",
+          "preacher": "이수재 목사",
+          "scripture": "사무엘하 23장"
+        },
+        {
           "youtubeId": "lonuK9XyNbE",
           "title": "제7차 말씀과기도축제",
           "date": "2026-09-23",
