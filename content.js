@@ -105,13 +105,6 @@ window.__CONTENT__ = {
     "wednesday": {
       "videos": [
         {
-          "youtubeId": "KHhv2QC6mBE",
-          "title": "수요예배 26.10.07",
-          "date": "2026-10-07",
-          "preacher": "이수재 목사",
-          "scripture": "여호수아 7장"
-        },
-        {
           "youtubeId": "Cyl-YgVznY8",
           "title": "수요예배 26.09.30",
           "date": "2026-09-30",
@@ -162,7 +155,7 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-10-12T12:00:00.000000Z"
+      "updatedAt": "2026-10-12T13:00:00.000000Z"
     },
     "friday": {
       "videos": [
