@@ -479,6 +479,13 @@ window.__CONTENT__ = {
     "sunday_pm": {
       "videos": [
         {
+          "youtubeId": "poXRwHRmbGs",
+          "title": "언약복음 세미나 5강",
+          "date": "2026-10-11",
+          "preacher": "이수재 목사",
+          "scripture": ""
+        },
+        {
           "youtubeId": "IghVk7d2es4",
           "title": "언약복음 세미나 4강",
           "date": "2026-10-04",
@@ -529,7 +536,7 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-10-06T00:00:00.000000Z"
+      "updatedAt": "2026-10-13T00:00:00.000000Z"
     }
   },
   "archive": [
