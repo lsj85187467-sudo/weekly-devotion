@@ -1,7 +1,7 @@
 // 이 파일은 관리자 편집 시 자동 생성됩니다. 수동 편집 금지.
 // content.json과 동일한 데이터를 인라인 script로 담아 fetch 실패(안드로이드 카톡 인앱 등) 상황에서도 앱이 정상 렌더되게 합니다.
 window.__CONTENT__ = {
-  "updatedAt": "2026-10-14T00:00:00.000000Z",
+  "updatedAt": "2026-10-14T01:00:00.000000Z",
   "sermon": {
     "sermonId": "s-2026-10-11-1cor1",
     "date": "2026년 10월 11일 주일",
@@ -496,35 +496,35 @@ window.__CONTENT__ = {
           "youtubeId": "poXRwHRmbGs",
           "title": "언약복음 세미나 5강",
           "date": "2026-10-11",
-          "preacher": "이수재 목사",
+          "preacher": "이경배 목사",
           "scripture": ""
         },
         {
           "youtubeId": "IghVk7d2es4",
           "title": "언약복음 세미나 4강",
           "date": "2026-10-04",
-          "preacher": "이수재 목사",
+          "preacher": "이경배 목사",
           "scripture": ""
         },
         {
           "youtubeId": "mjBy4piYKAE",
           "title": "언약복음 세미나 3강",
           "date": "2026-09-20",
-          "preacher": "이수재 목사",
+          "preacher": "이경배 목사",
           "scripture": ""
         },
         {
           "youtubeId": "HSjYO8NFtFs",
           "title": "언약복음신학 세미나 제2강의",
           "date": "2026-09-13",
-          "preacher": "이수재 목사",
+          "preacher": "이경배 목사",
           "scripture": ""
         },
         {
           "youtubeId": "XUWYne_QZi0",
           "title": "언약신학 복음 세미나",
           "date": "2026-09-06",
-          "preacher": "이수재 목사",
+          "preacher": "이경배 목사",
           "scripture": ""
         },
         {
@@ -550,7 +550,7 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-10-13T00:00:00.000000Z"
+      "updatedAt": "2026-10-14T01:00:00.000000Z"
     }
   },
   "archive": [
