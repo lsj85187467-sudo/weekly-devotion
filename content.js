@@ -493,6 +493,13 @@ window.__CONTENT__ = {
     "sunday_pm": {
       "videos": [
         {
+          "youtubeId": "RYcB55qa_hg",
+          "title": "언약복음 세미나 6강",
+          "date": "2026-10-18",
+          "preacher": "이경배 목사",
+          "scripture": ""
+        },
+        {
           "youtubeId": "poXRwHRmbGs",
           "title": "언약복음 세미나 5강",
           "date": "2026-10-11",
@@ -550,7 +557,7 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-10-14T01:00:00.000000Z"
+      "updatedAt": "2026-10-20T00:00:00.000000Z"
     }
   },
   "archive": [
