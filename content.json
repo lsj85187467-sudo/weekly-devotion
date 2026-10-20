@@ -33,6 +33,13 @@
     "sunday_am": {
       "videos": [
         {
+          "youtubeId": "eRGYI0QGrhs",
+          "title": "그리스도께서 어찌 나뉘었느냐",
+          "date": "2026-10-18",
+          "preacher": "이수재 목사",
+          "scripture": "고린도전서 1장 10절-17절"
+        },
+        {
           "youtubeId": "pJ9-YIG6Oco",
           "title": "십자가의 지혜와 능력으로 세워진 교회 공동체",
           "date": "2026-10-11",
@@ -112,7 +119,7 @@
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-10-14T00:00:00.000000Z"
+      "updatedAt": "2026-10-20T02:00:00.000000Z"
     },
     "wednesday": {
       "videos": [
