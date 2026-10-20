@@ -181,6 +181,13 @@ window.__CONTENT__ = {
     "friday": {
       "videos": [
         {
+          "youtubeId": "uKZH6--Rrug",
+          "title": "금요기도회 26.10.16",
+          "date": "2026-10-16",
+          "preacher": "이수재 목사",
+          "scripture": ""
+        },
+        {
           "youtubeId": "rEmHjNmczic",
           "title": "금요기도회 26.09.11 (하나님의 성품 시리즈)",
           "date": "2026-09-11",
@@ -203,7 +210,7 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-08-05T01:31:16.232520Z"
+      "updatedAt": "2026-10-20T01:00:00.000000Z"
     },
     "wpf": {
       "videos": [
