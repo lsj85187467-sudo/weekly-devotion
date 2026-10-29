@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T01:31:14.000000Z",
+  "updatedAt": "2026-10-29T03:00:00.000000Z",
   "sermon": {
     "sermonId": "s-2026-10-18-1cor1b",
     "date": "2026년 10월 18일 주일",
@@ -207,6 +207,13 @@
     "friday": {
       "videos": [
         {
+          "youtubeId": "guvwKdgLxAc",
+          "title": "금요기도회 26.10.23 (다윗의 신관 2)",
+          "date": "2026-10-23",
+          "preacher": "이수재 목사",
+          "scripture": ""
+        },
+        {
           "youtubeId": "uKZH6--Rrug",
           "title": "금요기도회 26.10.16",
           "date": "2026-10-16",
@@ -236,7 +243,7 @@
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-10-20T01:00:00.000000Z"
+      "updatedAt": "2026-10-29T03:00:00.000000Z"
     },
     "wpf": {
       "videos": [
