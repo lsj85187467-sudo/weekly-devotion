@@ -1,7 +1,7 @@
 // 이 파일은 관리자 편집 시 자동 생성됩니다. 수동 편집 금지.
 // content.json과 동일한 데이터를 인라인 script로 담아 fetch 실패(안드로이드 카톡 인앱 등) 상황에서도 앱이 정상 렌더되게 합니다.
 window.__CONTENT__ = {
-  "updatedAt": "2026-11-02T00:00:00.000000Z",
+  "updatedAt": "2026-11-02T05:40:00.000000Z",
   "sermon": {
     "sermonId": "s-2026-11-01-1cor2a",
     "date": "2026년 11월 1일 주일",
@@ -459,6 +459,83 @@ window.__CONTENT__ = {
     "wpf1": {
       "videos": [
         {
+          "youtubeId": "WJBOJP6yEKE",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-09-05",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 20장"
+        },
+        {
+          "youtubeId": "EUK3Tl7clfI",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-09-04",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 19장"
+        },
+        {
+          "youtubeId": "iueo1NKFdfI",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-09-03",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 18장"
+        },
+        {
+          "youtubeId": "JKvisQbi5aM",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-09-02",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 17장"
+        },
+        {
+          "youtubeId": "D2KK62fFbDE",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-09-01",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 16장"
+        },
+        {
+          "youtubeId": "Ba9AnvsNgMk",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-31",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 15장"
+        },
+        {
+          "youtubeId": "xZfoGQGpB9Y",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-31",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 15장"
+        },
+        {
+          "youtubeId": "upeBGAWzTI0",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-30",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 14장"
+        },
+        {
+          "youtubeId": "xJ_86HneB0g",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-29",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 13장"
+        },
+        {
+          "youtubeId": "8_uvQv-HdPE",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-28",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 12장"
+        },
+        {
+          "youtubeId": "W5tm5e5YV04",
+          "title": "제1차 말씀과기도축제",
+          "date": "2025-08-27",
+          "preacher": "이수재 목사",
+          "scripture": "창세기 11장"
+        },
+        {
           "youtubeId": "5Rkk4KwCfG8",
           "title": "제1차 말씀과기도축제",
           "date": "2025-08-26",
@@ -544,7 +621,7 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-09-09T00:00:00.000000Z"
+      "updatedAt": "2026-11-02T05:40:00.000000Z"
     },
     "sunday_pm": {
       "videos": [
