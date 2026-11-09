@@ -1,7 +1,7 @@
 // 이 파일은 관리자 편집 시 자동 생성됩니다. 수동 편집 금지.
 // content.json과 동일한 데이터를 인라인 script로 담아 fetch 실패(안드로이드 카톡 인앱 등) 상황에서도 앱이 정상 렌더되게 합니다.
 window.__CONTENT__ = {
-  "updatedAt": "2026-11-09T05:07:44.486931Z",
+  "updatedAt": "2026-11-09T05:09:27.952027Z",
   "sermon": {
     "sermonId": "s-2026-11-01-1cor2a",
     "date": "2026년 11월 1일 주일",
@@ -140,6 +140,13 @@ window.__CONTENT__ = {
     "wednesday": {
       "videos": [
         {
+          "youtubeId": "zdGArZks9OA",
+          "title": "수요예배 26.11.04",
+          "date": "2026-11-04",
+          "preacher": "박찬일 선교사",
+          "scripture": "여호수아 10장 강해(두번째)"
+        },
+        {
           "youtubeId": "jX1zkLQtXxQ",
           "title": "수요예배 26.10.28",
           "date": "2026-10-28",
@@ -218,10 +225,17 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-11-02T05:08:00.000000Z"
+      "updatedAt": "2026-11-09T05:09:27.952027Z"
     },
     "friday": {
       "videos": [
+        {
+          "youtubeId": "juv9nddhvHw",
+          "title": "금요기도회 26.11.06 (다윗의 신관 3)",
+          "date": "2026-11-06",
+          "preacher": "이수재 목사",
+          "scripture": ""
+        },
         {
           "youtubeId": "guvwKdgLxAc",
           "title": "금요기도회 26.10.23 (다윗의 신관 2)",
@@ -259,7 +273,7 @@ window.__CONTENT__ = {
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-10-29T03:10:00.000000Z"
+      "updatedAt": "2026-11-09T05:09:18.986368Z"
     },
     "wpf": {
       "videos": [
@@ -627,7 +641,7 @@ window.__CONTENT__ = {
       "videos": [
         {
           "youtubeId": "EIliHaorFdA",
-          "title": "언약복음 세미나 9강",
+          "title": "",
           "date": "2026-11-08",
           "preacher": "이경배 목사",
           "scripture": ""

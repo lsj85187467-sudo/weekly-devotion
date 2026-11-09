@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-09T05:07:44.486931Z",
+  "updatedAt": "2026-11-09T05:09:27.952027Z",
   "sermon": {
     "sermonId": "s-2026-11-01-1cor2a",
     "date": "2026년 11월 1일 주일",
@@ -138,6 +138,13 @@
     "wednesday": {
       "videos": [
         {
+          "youtubeId": "zdGArZks9OA",
+          "title": "수요예배 26.11.04",
+          "date": "2026-11-04",
+          "preacher": "박찬일 선교사",
+          "scripture": "여호수아 10장 강해(두번째)"
+        },
+        {
           "youtubeId": "jX1zkLQtXxQ",
           "title": "수요예배 26.10.28",
           "date": "2026-10-28",
@@ -216,10 +223,17 @@
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-11-02T05:08:00.000000Z"
+      "updatedAt": "2026-11-09T05:09:27.952027Z"
     },
     "friday": {
       "videos": [
+        {
+          "youtubeId": "juv9nddhvHw",
+          "title": "금요기도회 26.11.06 (다윗의 신관 3)",
+          "date": "2026-11-06",
+          "preacher": "이수재 목사",
+          "scripture": ""
+        },
         {
           "youtubeId": "guvwKdgLxAc",
           "title": "금요기도회 26.10.23 (다윗의 신관 2)",
@@ -257,7 +271,7 @@
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-10-29T03:10:00.000000Z"
+      "updatedAt": "2026-11-09T05:09:18.986368Z"
     },
     "wpf": {
       "videos": [
@@ -625,7 +639,7 @@
       "videos": [
         {
           "youtubeId": "EIliHaorFdA",
-          "title": "언약복음 세미나 9강",
+          "title": "",
           "date": "2026-11-08",
           "preacher": "이경배 목사",
           "scripture": ""
