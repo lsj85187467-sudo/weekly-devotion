@@ -641,7 +641,7 @@ window.__CONTENT__ = {
       "videos": [
         {
           "youtubeId": "EIliHaorFdA",
-          "title": "",
+          "title": "주일저녁예배 26.11.08",
           "date": "2026-11-08",
           "preacher": "이경배 목사",
           "scripture": ""
