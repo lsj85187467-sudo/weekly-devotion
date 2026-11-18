@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-09T05:19:09.728374Z",
+  "updatedAt": "2026-11-18T07:27:49.546768Z",
   "sermon": {
     "sermonId": "s-2026-11-08-1cor2b",
     "date": "2026년 11월 8일 주일",
@@ -145,6 +145,13 @@
     "wednesday": {
       "videos": [
         {
+          "youtubeId": "wvsFjbHG5eY",
+          "title": "수요예배 26.11.11",
+          "date": "2026-11-11",
+          "preacher": "이수재 목사",
+          "scripture": "여호수아 11장 강해"
+        },
+        {
           "youtubeId": "zdGArZks9OA",
           "title": "수요예배 26.11.04",
           "date": "2026-11-04",
@@ -230,7 +237,7 @@
         }
       ],
       "shorts": [],
-      "updatedAt": "2026-11-09T05:09:27.952027Z"
+      "updatedAt": "2026-11-18T07:27:49.546768Z"
     },
     "friday": {
       "videos": [
